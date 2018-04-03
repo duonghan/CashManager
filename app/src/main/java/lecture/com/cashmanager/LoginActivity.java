@@ -11,12 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import lecture.com.cashmanager.dao.AccountDAO;
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
-    EditText _emailText;
+    EditText _usernameText;
     EditText _passwordText;
     Button _loginButton;
     TextView _signupLink;
@@ -26,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        _emailText      = (EditText) findViewById(R.id.input_email);
+        _usernameText = (EditText) findViewById(R.id.input_email);
         _passwordText   = (EditText) findViewById(R.id.input_password);
         _loginButton    = (Button) findViewById(R.id.btn_login);
         _signupLink     = (TextView)findViewById(R.id.link_signup);
@@ -66,13 +68,18 @@ public class LoginActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
+        progressDialog.setMessage(getString(R.string.authenticating));
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
+        final String username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
+        final AccountDAO accountDAO = new AccountDAO(this);
+        if(!accountDAO.isValid(username, password)){
+            onLoginFailed();
+            return;
+        }
 
         new android.os.Handler().postDelayed(
             new Runnable() {
@@ -105,7 +112,11 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        String username = _usernameText.getText().toString();
+        intent.putExtra("user", username);
+
         startActivity(intent);
         finish();
     }
@@ -119,21 +130,17 @@ public class LoginActivity extends AppCompatActivity {
     public boolean validate() {
         boolean valid = true;
 
-        String email = _emailText.getText().toString();
+        String account  = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        //Test
-        String validEmail = "duongbk512@gmail.com";
-        String validPassword = "123456789";
-
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() || !email.equals(validEmail)) {
-            _emailText.setError("enter a valid email address");
+        if (account.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(account).matches()) {
+            _usernameText.setError("enter a valid account address");
             valid = false;
         } else {
-            _emailText.setError(null);
+            _usernameText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10 || !password.equals(validPassword)) {
+        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
             _passwordText.setError("between 4 and 10 alphanumeric characters");
             valid = false;
         } else {

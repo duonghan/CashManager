@@ -11,17 +11,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import lecture.com.cashmanager.dao.AccountDAO;
+import lecture.com.cashmanager.model.Account;
+
 public class SignupActivity extends AppCompatActivity {
 
     private static final String TAG = "SignupActivity";
 
     EditText _nameText;
-    EditText _addressText;
     EditText _emailText;
-    EditText _mobileText;
+    EditText _usernameText;
     EditText _passwordText;
     EditText _reEnterPasswordText;
-    Button _signupButton;
+    Button   _signupButton;
     TextView _loginLink;
 
     @Override
@@ -31,9 +33,8 @@ public class SignupActivity extends AppCompatActivity {
 
         //Bind data to the layout activity_signup.xml
         _nameText = (EditText)findViewById(R.id.input_name);
-        _addressText = (EditText)findViewById(R.id.input_address);
         _emailText = (EditText)findViewById(R.id.input_email);
-        _mobileText = (EditText)findViewById(R.id.input_mobile);
+        _usernameText = (EditText)findViewById(R.id.input_username);
         _passwordText = (EditText)findViewById(R.id.input_password);
         _reEnterPasswordText = (EditText)findViewById(R.id.input_reEnterPassword);
         _signupButton = (Button) findViewById(R.id.btn_signup);
@@ -76,13 +77,14 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.show();
 
         String name = _nameText.getText().toString();
-        String address = _addressText.getText().toString();
         String email = _emailText.getText().toString();
-        String mobile = _mobileText.getText().toString();
+        String username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
-        String reEnterPassword = _reEnterPasswordText.getText().toString();
 
-        // TODO: Implement your own signup logic here.
+        //Implement signup logic.
+        Account acc = new Account(username, password, name, email);
+        AccountDAO accountDAO = new AccountDAO(this);
+        accountDAO.addAccount(acc);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -100,26 +102,17 @@ public class SignupActivity extends AppCompatActivity {
         boolean valid = true;
 
         String name = _nameText.getText().toString();
-        String address = _addressText.getText().toString();
         String email = _emailText.getText().toString();
-        String mobile = _mobileText.getText().toString();
+        String username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
 
-        if (name.isEmpty() || name.length() < 3) {
+        if (name.isEmpty() || name.length() < 6) {
             _nameText.setError("at least 3 characters");
             valid = false;
         } else {
             _nameText.setError(null);
         }
-
-        if (address.isEmpty()) {
-            _addressText.setError("Enter Valid Address");
-            valid = false;
-        } else {
-            _addressText.setError(null);
-        }
-
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             _emailText.setError("enter a valid email address");
@@ -128,11 +121,11 @@ public class SignupActivity extends AppCompatActivity {
             _emailText.setError(null);
         }
 
-        if (mobile.isEmpty() || mobile.length()!=10) {
-            _mobileText.setError("Enter Valid Mobile Number");
+        if (username.isEmpty() || username.length() < 6) {
+            _usernameText.setError("between 4 and 10 alphanumeric characters");
             valid = false;
         } else {
-            _mobileText.setError(null);
+            _usernameText.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
