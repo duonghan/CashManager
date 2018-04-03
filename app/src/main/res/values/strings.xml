@@ -1,9 +1,19 @@
 <resources>
-    <string name="app_name">CashManager</string>
+    <string name="app_name">QL chi tiêu</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="settings">Thiết lập</string>
+    <string name="username">Tài khoản</string>
+    <string name="password">Mật khẩu</string>
+    <string name="login_btn_login">Đăng nhập</string>
+    <string name="signup_name">Họ tên</string>
+    <string name="signup_btn_register">Đăng ký</string>
+    <string name="signup_link_login">Đã đăng ký? Đăng nhập ngay</string>
+    <string name="login_link_register">Chưa có tài khoản? Đăng kí ngay</string>
+    <string name="signup_retype_password">Nhập lại mật khẩu</string>
+    <string name="email">Email</string>
+    <string name="authenticating">Đang xác thực...</string>
 </resources>

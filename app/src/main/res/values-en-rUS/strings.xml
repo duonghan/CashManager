@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cash Manager</string>
+    <string name="settings">Settings</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login_btn_login">Login</string>
+    <string name="signup_name">Name</string>
+    <string name="signup_btn_register">Create Account</string>
+    <string name="signup_link_login">Already a member? Login</string>
+    <string name="login_link_register">No username yet? Create one</string>
+    <string name="signup_retype_password">Re-Enter Password</string>
+    <string name="email">Email</string>
+    <string name="authenticating">Authenticating...</string>
+</resources>
