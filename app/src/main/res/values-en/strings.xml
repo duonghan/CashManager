@@ -8,7 +8,7 @@
     <string name="signup_name">Name</string>
     <string name="signup_btn_register">Create Account</string>
     <string name="signup_link_login">Already a member? Login</string>
-    <string name="login_link_register">No username yet? Create one</string>
+    <string name="login_link_register">No account yet? Create one</string>
     <string name="signup_retype_password">Re-Enter Password</string>
     <string name="email">Email</string>
     <string name="authenticating">Authenticating...</string>
