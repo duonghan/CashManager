@@ -25,9 +25,9 @@ public class CategoryDAO extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE = "CREATE TABLE "+
                                                 TABLE_NAME+ "(" +
-                                                ID + "integer primary key autoincrement, "+
-                                                NAME + " text, "+
-                                                TYPE + " text)";
+                                                ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                                                NAME + " TEXT, "+
+                                                TYPE + " TEXT)";
 
     private Context context;
 

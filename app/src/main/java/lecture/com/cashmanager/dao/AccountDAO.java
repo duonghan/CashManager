@@ -24,11 +24,11 @@ public class AccountDAO extends SQLiteOpenHelper{
 
     private static final String CREATE_TABLE = "CREATE TABLE "+
                                                 TABLE_NAME+ "(" +
-                                                ID + "integer primary key autoincrement, "+
-                                                USERNAME + " text, "+
-                                                PASSWORD + " text, "+
-                                                NAME + " text, "+
-                                                EMAIL + " text)";
+                                                ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                                                USERNAME + " TEXT, "+
+                                                PASSWORD + " TEXT, "+
+                                                NAME + " TEXT, "+
+                                                EMAIL + " TEXT)";
 
     private Context context;
 
@@ -65,11 +65,15 @@ public class AccountDAO extends SQLiteOpenHelper{
         Log.d(TAG, "addAccount: Successful ");
     }
 
-    public Account getAccount(String username){
+    public Account getAccount(String username, String password){
 
         Account account = new Account();
 
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + USERNAME + "=" + username;
+        String query = "SELECT * FROM " +
+                        TABLE_NAME + " WHERE " +
+                        USERNAME + " = \'" + username +
+                        "\' AND " + PASSWORD + " = \'" + password + "\'";
+
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
@@ -87,8 +91,8 @@ public class AccountDAO extends SQLiteOpenHelper{
 
     public boolean isValid(String username, String password){
         String query =  "SELECT * FROM " + TABLE_NAME +
-                        " WHERE " + USERNAME + "=" + username +
-                        " AND " + PASSWORD + " = " + password;
+                        " WHERE " + USERNAME + "= \'" + username +
+                        "\' AND " + PASSWORD + " = \'" + password + "\'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
