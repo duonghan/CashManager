@@ -108,7 +108,7 @@ public class SignupActivity extends AppCompatActivity {
         String reEnterPassword = _reEnterPasswordText.getText().toString();
 
         if (name.isEmpty() || name.length() < 6) {
-            _nameText.setError("at least 3 characters");
+            _nameText.setError("at least 10 characters");
             valid = false;
         } else {
             _nameText.setError(null);
@@ -122,7 +122,7 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         if (username.isEmpty() || username.length() < 6) {
-            _usernameText.setError("between 4 and 10 alphanumeric characters");
+            _usernameText.setError("username must be at least 6 characters");
             valid = false;
         } else {
             _usernameText.setError(null);
@@ -147,7 +147,8 @@ public class SignupActivity extends AppCompatActivity {
 
     private void onSignupSuccess() {
         _signupButton.setEnabled(true);
-        setResult(RESULT_OK, null);
+        Intent intent = new Intent(this, LoginActivity.class);
+        setResult(RESULT_OK, intent);
         finish();
     }
 

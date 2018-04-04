@@ -17,23 +17,27 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final int REQUEST_LOGIN = 0;
+    private static boolean isLogin = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        if(intent.getStringExtra("user") == null){
+//        if(intent.getStringExtra("user") == null){
+//            displayLoginPage();
+//        }
+        if(!isLogin){
             displayLoginPage();
+        }else{
+            displayHomePage();
         }
-
-        displayHomePage();
-
     }
 
     private void displayLoginPage() {
         Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_LOGIN);
         finish();
     }
 
@@ -115,5 +119,19 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_LOGIN) {
+            if (resultCode == RESULT_OK) {
+
+                // TODO: Implement successful login logic here
+                // By default we just finish the Activity and log them in automatically
+//                this.finish();
+                isLogin = true;
+                this.onRestart();
+            }
+        }
     }
 }

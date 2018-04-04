@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import lecture.com.cashmanager.dao.AccountDAO;
+import lecture.com.cashmanager.model.Account;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -22,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText _passwordText;
     Button _loginButton;
     TextView _signupLink;
+
+    Account account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +77,11 @@ public class LoginActivity extends AppCompatActivity {
         final String username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
+        //authentication logic.
         final AccountDAO accountDAO = new AccountDAO(this);
-        if(!accountDAO.isValid(username, password)){
+        account = accountDAO.getAccount(username, password);
+
+        if(account == null){
             onLoginFailed();
             return;
         }
@@ -99,7 +104,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 // TODO: Implement successful signup logic here
                 // By default we just finish the Activity and log them in automatically
-                this.finish();
+                startActivity(data);
+//                this.finish();
             }
         }
     }
@@ -112,13 +118,13 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        String username = _usernameText.getText().toString();
-        intent.putExtra("user", username);
-
-        startActivity(intent);
+        Intent intent = new Intent(this, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("user", account);
+        intent.putExtras(bundle);
+        setResult(RESULT_OK, intent);
         finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     public void onLoginFailed() {
@@ -130,11 +136,11 @@ public class LoginActivity extends AppCompatActivity {
     public boolean validate() {
         boolean valid = true;
 
-        String account  = _usernameText.getText().toString();
+        String username  = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        if (account.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(account).matches()) {
-            _usernameText.setError("enter a valid account address");
+        if (username.isEmpty() || username.length() < 6) {
+            _usernameText.setError("enter a valid username");
             valid = false;
         } else {
             _usernameText.setError(null);
