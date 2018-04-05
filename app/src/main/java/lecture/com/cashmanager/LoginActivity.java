@@ -74,8 +74,8 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage(getString(R.string.authenticating));
         progressDialog.show();
 
-        final String username = _usernameText.getText().toString();
-        String password = _passwordText.getText().toString();
+        final String username = _usernameText.getText().toString().trim();
+        String password = _passwordText.getText().toString().trim();
 
         //authentication logic.
         final AccountDAO accountDAO = new AccountDAO(this);
@@ -103,9 +103,9 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
 
                 // TODO: Implement successful signup logic here
-                // By default we just finish the Activity and log them in automatically
-                startActivity(data);
-//                this.finish();
+                String userName = data.getStringExtra("username");
+                _usernameText.setText(userName);
+                _passwordText.requestFocus();
             }
         }
     }
@@ -122,9 +122,10 @@ public class LoginActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("user", account);
         intent.putExtras(bundle);
-        setResult(RESULT_OK, intent);
+
+        startActivity(intent);
         finish();
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        overridePendingTransition(R.anim.close_enter, R.anim.close_exit);
     }
 
     public void onLoginFailed() {

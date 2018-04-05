@@ -17,6 +17,7 @@ import lecture.com.cashmanager.model.Account;
 public class SignupActivity extends AppCompatActivity {
 
     private static final String TAG = "SignupActivity";
+    private String username;
 
     EditText _nameText;
     EditText _emailText;
@@ -78,7 +79,7 @@ public class SignupActivity extends AppCompatActivity {
 
         String name = _nameText.getText().toString();
         String email = _emailText.getText().toString();
-        String username = _usernameText.getText().toString();
+        username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
 
         //Implement signup logic.
@@ -148,8 +149,11 @@ public class SignupActivity extends AppCompatActivity {
     private void onSignupSuccess() {
         _signupButton.setEnabled(true);
         Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra("username", username);
         setResult(RESULT_OK, intent);
+        startActivity(intent);
         finish();
+        overridePendingTransition(android.R.anim.accelerate_decelerate_interpolator, android.R.anim.accelerate_interpolator);
     }
 
     private void onSignupFailed() {
