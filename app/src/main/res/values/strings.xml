@@ -2,8 +2,6 @@
     <string name="app_name">QL chi tiêu</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="settings">Thiết lập</string>
     <string name="username">Tài khoản</string>
@@ -47,4 +45,14 @@
     <string name="txt_Debt_and_Loan">Đi vay và Cho vay</string>
     <string name="txt_Repayment">Trả nợ</string>
     <string name="txt_Debt_Collection">Thu nợ</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="change_pass">Đổi mật khẩu</string>
+    <string name="btn_add_expense">Thêm chi</string>
+    <string name="btn_add_income">Thêm thu</string>
+    <string name="transaction">Giao dịch</string>
+    <string name="debt">Sổ nợ</string>
+    <string name="category">Danh mục</string>
+    <string name="report">Báo cáo</string>
+    <string name="system">Hệ thống</string>
+    <string name="about">Giới thiệu</string>
 </resources>

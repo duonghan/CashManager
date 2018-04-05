@@ -36,6 +36,13 @@ public class LoginActivity extends AppCompatActivity {
         _loginButton    = (Button) findViewById(R.id.btn_login);
         _signupLink     = (TextView)findViewById(R.id.link_signup);
 
+        Intent intent = getIntent();
+        if(intent.getStringExtra("username") != null){
+            _usernameText.setText(intent.getStringExtra("username"));
+            _passwordText.requestFocus();
+        }
+
+
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
