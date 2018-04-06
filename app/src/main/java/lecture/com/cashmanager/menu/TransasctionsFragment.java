@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+
 import java.util.Calendar;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
@@ -35,6 +37,7 @@ public class TransasctionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_transasctions, container, false);
+//        final FloatingActionButton fab_income = (FloatingActionButton) findViewById(R.id.fab_income);
 
         /* start before 1 month from now */
         Calendar startDate = Calendar.getInstance();
