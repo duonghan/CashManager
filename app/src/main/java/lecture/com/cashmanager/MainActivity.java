@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     Account account;
+    TextView txtName;
+    TextView txtEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +40,17 @@ public class MainActivity extends AppCompatActivity
         TransasctionsFragment mainfragment = new TransasctionsFragment();
         initFragment(mainfragment);
 
-
         displayHomePage();
+
         Intent intent = getIntent();
         account = (Account) intent.getSerializableExtra("user");
+
+        // Inflate the layout for this fragment
+//        txtName = (TextView)findViewById(R.id.nav_header_name);
+//        txtName = (TextView)findViewById(R.id.nav_header_email);
+//        txtName.setText(account.getName());
+//        txtEmail.setText(account.getEmail());
+
     }
 
     private void initFragment(Fragment fragment){
@@ -53,10 +63,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Floating Action Button handle
-        handleFab();
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -66,12 +72,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
     }
 
-    private void handleFab(){
-        final FloatingActionButton fabIncome = (FloatingActionButton)findViewById(R.id.fab_income);
-        final FloatingActionButton fabExpense = (FloatingActionButton)findViewById(R.id.fab_expense);
-    }
 
     @Override
     public void onBackPressed() {

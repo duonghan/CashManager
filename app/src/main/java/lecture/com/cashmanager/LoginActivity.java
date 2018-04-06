@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     // onLoginFailed();
                     progressDialog.dismiss();
                 }
-            }, 3000);
+            }, 2000);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), getString(R.string.login_failed), Toast.LENGTH_LONG).show();
 
         _loginButton.setEnabled(true);
     }
@@ -148,14 +148,14 @@ public class LoginActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         if (username.isEmpty() || username.length() < 6) {
-            _usernameText.setError("enter a valid username");
+            _usernameText.setError(getString(R.string.login_username));
             valid = false;
         } else {
             _usernameText.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            _passwordText.setError("between 4 and 10 alphanumeric characters");
+            _passwordText.setError(getString(R.string.login_password));
             valid = false;
         } else {
             _passwordText.setError(null);
