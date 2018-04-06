@@ -55,7 +55,9 @@
     <string name="report">Báo cáo</string>
     <string name="system">Hệ thống</string>
     <string name="about">Giới thiệu</string>
+    <string name="login_failed">Đăng nhập thất bại</string>
+    <string name="login_username">Tên đăng nhập không hợp lệ</string>
+    <string name="login_password">Mật khấu không hợp lệ</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

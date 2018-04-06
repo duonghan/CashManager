@@ -53,4 +53,7 @@
     <string name="report">Report</string>
     <string name="system">System</string>
     <string name="about">About</string>
+    <string name="login_failed">Login failed</string>
+    <string name="login_username">Enter a valid username</string>
+    <string name="login_password">Between 4 and 10 alphanumeric characters</string>
 </resources>
