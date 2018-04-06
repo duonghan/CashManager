@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QL chi tiêu</string>
+    <string name="app_name">Quản lý chi tiêu</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_desc">Navigation header</string>
@@ -55,4 +55,7 @@
     <string name="report">Báo cáo</string>
     <string name="system">Hệ thống</string>
     <string name="about">Giới thiệu</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -36,6 +36,7 @@
         fab:fab_labelsPosition="left">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_income"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_icon="@drawable/ic_fab_income"
@@ -43,6 +44,7 @@
             fab:fab_title="@string/btn_add_income" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_expense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_icon="@drawable/ic_fab_expense"
