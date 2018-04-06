@@ -49,8 +49,8 @@
     <string name="btn_add_income">Add Income</string>
     <string name="transaction">Transactions</string>
     <string name="debt">Debts</string>
-    <string name="category">Report</string>
-    <string name="report">Categories</string>
+    <string name="category">Categories</string>
+    <string name="report">Report</string>
     <string name="system">System</string>
     <string name="about">About</string>
 </resources>

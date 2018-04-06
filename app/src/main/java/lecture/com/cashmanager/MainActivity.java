@@ -2,7 +2,6 @@ package lecture.com.cashmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import lecture.com.cashmanager.menu.AboutFragment;
 import lecture.com.cashmanager.menu.CategoryFragment;
@@ -70,19 +71,6 @@ public class MainActivity extends AppCompatActivity
     private void handleFab(){
         final FloatingActionButton fabIncome = (FloatingActionButton)findViewById(R.id.fab_income);
         final FloatingActionButton fabExpense = (FloatingActionButton)findViewById(R.id.fab_expense);
-
-        fabIncome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        fabExpense.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     @Override
