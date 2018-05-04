@@ -1,5 +1,6 @@
 package lecture.com.cashmanager;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -140,8 +141,14 @@ public class MainActivity extends AppCompatActivity
             AboutFragment mainfragment = new AboutFragment();
             initFragment(mainfragment);
         } else if (id == R.id.nav_setting) {
-            SettingFragment mainfragment = new SettingFragment();
-            initFragment(mainfragment);
+//            SettingFragment mainfragment = new SettingFragment();
+//            initFragment(mainfragment);
+
+//            android.app.Fragment settingFragment = new SettingFragment();
+//            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//            if(savedInstanceState == null){
+//                fragmentTransaction.add(R.id.)
+//            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
