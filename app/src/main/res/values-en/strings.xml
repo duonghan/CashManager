@@ -56,4 +56,14 @@
     <string name="login_failed">Login failed</string>
     <string name="login_username">Enter a valid username</string>
     <string name="login_password">Between 4 and 10 alphanumeric characters</string>
+    <string name="pref_header_general">General</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="pref_header_notifications">Notifications</string>
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+    <string name="pref_title_change_lang">Change language</string>
+    <string name="display">Display</string>
+    <string name="no_transact">No transactions</string>
+    <string name="no_transact_desc">Tap + to add one</string>
 </resources>
