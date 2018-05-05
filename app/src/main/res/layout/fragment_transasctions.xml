@@ -23,12 +23,32 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
+    <ImageView
+        android:id="@+id/img_null"
+        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Main - Transaction"
-        android:textSize="30sp"/>
+        android:src="@drawable/ic_no_transaction"/>
+
+    <TextView
+        android:id="@+id/txt_no_transact_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_null"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/no_transact"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/txt_no_transact_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_no_transact_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/no_transact_desc" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/right_labels"

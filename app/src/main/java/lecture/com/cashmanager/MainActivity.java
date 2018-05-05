@@ -1,7 +1,10 @@
 package lecture.com.cashmanager;
 
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -9,6 +12,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +20,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+
+import java.util.Locale;
 
 import lecture.com.cashmanager.menu.AboutFragment;
 import lecture.com.cashmanager.menu.CategoryFragment;
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loadLocale();
         setContentView(R.layout.activity_main);
 
         //Set the fragment initially
@@ -149,11 +156,29 @@ public class MainActivity extends AppCompatActivity
 //            if(savedInstanceState == null){
 //                fragmentTransaction.add(R.id.)
 //            }
+
+            Intent setting = new Intent(this, SettingsActivity.class);
+            startActivity(setting);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void setLocale(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration configuration = new Configuration();
+        configuration.setLocale(locale);
+        getBaseContext().getResources().updateConfiguration(configuration, getBaseContext().getResources().getDisplayMetrics());
+    }
+
+    //Load Language saved to shared preferences
+    public void loadLocale(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String language = preferences.getString("lang_list","vi");
+        setLocale(language);
     }
 
 }
