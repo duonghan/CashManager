@@ -66,4 +66,7 @@
     <string name="display">Display</string>
     <string name="no_transact">No transactions</string>
     <string name="no_transact_desc">Tap + to add one</string>
+    <string name="add_ts_select_cate">Select category</string>
+    <string name="add_ts_note">Note</string>
+    <string name="add_ts_today">Today</string>
 </resources>

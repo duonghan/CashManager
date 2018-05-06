@@ -1,6 +1,7 @@
 package lecture.com.cashmanager.menu;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,15 +19,20 @@ import java.util.Calendar;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
+import lecture.com.cashmanager.AddTransactionActivity;
 import lecture.com.cashmanager.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TransasctionsFragment extends Fragment {
+public class TransasctionsFragment extends Fragment implements View.OnClickListener{
 
     private HorizontalCalendar horizontalCalendar;
+
+    private FloatingActionButton fab_income;
+    private FloatingActionButton fab_expense;
+
 
     public TransasctionsFragment() {
         // Required empty public constructor
@@ -37,11 +43,16 @@ public class TransasctionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_transasctions, container, false);
-//        final FloatingActionButton fab_income = (FloatingActionButton) findViewById(R.id.fab_income);
 
-        /* start before 1 month from now */
+        fab_income = rootView.findViewById(R.id.fab_income);
+        fab_expense = rootView.findViewById(R.id.fab_expense);
+
+        fab_income.setOnClickListener(this);
+        fab_expense.setOnClickListener(this);
+
+        /* start before 12 month from now */
         Calendar startDate = Calendar.getInstance();
-        startDate.add(Calendar.MONTH, -1);
+        startDate.add(Calendar.MONTH, -12);
 
         /* end after 1 month from now */
         Calendar endDate = Calendar.getInstance();
@@ -50,12 +61,10 @@ public class TransasctionsFragment extends Fragment {
         horizontalCalendar = new HorizontalCalendar.Builder(rootView, R.id.calendarView)
                 .range(startDate, endDate)
                 .datesNumberOnScreen(3)
+                .mode(HorizontalCalendar.Mode.MONTHS)
                 .configure()
-//                .formatTopText("MMM")
-//                .formatMiddleText("dd")
-                .formatMiddleText("MM/yyyy")
-//                .formatBottomText("EEE")
-                .textSize(14f, 24f, 14f)
+                    .formatMiddleText("MM/yyyy")
+                    .sizeMiddleText(17f)
                 .showTopText(false)
                 .showBottomText(false)
                 .textColor(Color.LTGRAY, Color.WHITE)
@@ -65,11 +74,30 @@ public class TransasctionsFragment extends Fragment {
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
-                Toast.makeText(getContext(), DateFormat.format("EEE, MMM d, yyyy", date) + " is selected!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), DateFormat.format("MM/yyyy", date) + " is selected!", Toast.LENGTH_SHORT).show();
             }
 
         });
         return rootView;
     }
 
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.fab_income:
+                Intent addIncome = new Intent(getActivity(), AddTransactionActivity.class);
+                startActivity(addIncome);
+                break;
+
+            case R.id.fab_expense:
+                Intent addExpense = new Intent(getActivity(), AddTransactionActivity.class);
+                startActivity(addExpense);
+                break;
+
+            default:
+                break;
+        }
+    }
 }

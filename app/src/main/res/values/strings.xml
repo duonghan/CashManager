@@ -153,6 +153,9 @@
     <string name="display">Hiển thị</string>
     <string name="no_transact">Không có giao dịch</string>
     <string name="no_transact_desc">Chạm + để thêm</string>
+    <string name="add_ts_select_cate">Chọn danh mục</string>
+    <string name="add_ts_note">Ghi chú</string>
+    <string name="add_ts_today">Hom nay</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>
