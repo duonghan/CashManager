@@ -24,6 +24,7 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import java.util.Locale;
 
 import lecture.com.cashmanager.menu.AboutFragment;
+import lecture.com.cashmanager.menu.CategoryActivity;
 import lecture.com.cashmanager.menu.CategoryFragment;
 import lecture.com.cashmanager.menu.DebtFragment;
 import lecture.com.cashmanager.menu.ReportFragment;
@@ -53,12 +54,6 @@ public class MainActivity extends AppCompatActivity
         Intent intent = getIntent();
         account = (Account) intent.getSerializableExtra("user");
 
-        // Inflate the layout for this fragment
-//        txtName = (TextView)findViewById(R.id.nav_header_name);
-//        txtName = (TextView)findViewById(R.id.nav_header_email);
-//        txtName.setText(account.getName());
-//        txtEmail.setText(account.getEmail());
-
     }
 
     private void initFragment(Fragment fragment){
@@ -80,6 +75,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Inflate the layout for this fragment
+//        txtName = (TextView)findViewById(R.id.nav_header_name);
+//        txtEmail = (TextView)findViewById(R.id.nav_header_email);
+//        SharedPreferences preferences = getSharedPreferences("user", Activity.MODE_PRIVATE);
+//
+//        txtName.setText(preferences.getString("name", "John Cena"));
+//        txtEmail.setText(preferences.getString("email", "example@gmail.com"));
 
     }
 
@@ -142,8 +144,10 @@ public class MainActivity extends AppCompatActivity
             ReportFragment mainfragment = new ReportFragment();
             initFragment(mainfragment);
         } else if (id == R.id.nav_categories) {
-            CategoryFragment mainfragment = new CategoryFragment();
-            initFragment(mainfragment);
+//            CategoryFragment mainfragment = new CategoryFragment();
+//            initFragment(mainfragment);
+            Intent category = new Intent(this, CategoryActivity.class);
+            startActivity(category);
         } else if (id == R.id.nav_about) {
             AboutFragment mainfragment = new AboutFragment();
             initFragment(mainfragment);

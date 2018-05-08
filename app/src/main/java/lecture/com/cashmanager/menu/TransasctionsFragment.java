@@ -32,6 +32,8 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
 
     private FloatingActionButton fab_income;
     private FloatingActionButton fab_expense;
+    private final int INCOME = 111;
+    private final int EXPENSE = 111;
 
 
     public TransasctionsFragment() {
@@ -88,12 +90,12 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
 
             case R.id.fab_income:
                 Intent addIncome = new Intent(getActivity(), AddTransactionActivity.class);
-                startActivity(addIncome);
+                startActivityForResult(addIncome, INCOME);
                 break;
 
             case R.id.fab_expense:
                 Intent addExpense = new Intent(getActivity(), AddTransactionActivity.class);
-                startActivity(addExpense);
+                startActivityForResult(addExpense, EXPENSE);
                 break;
 
             default:

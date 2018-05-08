@@ -71,12 +71,29 @@ public class CategoryDAO extends SQLiteOpenHelper {
 
         if(cursor.moveToFirst()){
             do{
-                Category user = new Category();
-                user.setId(cursor.getInt(0));
-                user.setName(cursor.getString(1));
-                user.setType(cursor.getString(2));
+                Category category = new Category();
+                category.setId(cursor.getInt(0));
+                category.setName(cursor.getString(1));
+                category.setType(cursor.getString(2));
 
-                lstCategory.add(user);
+                lstCategory.add(category);
+            }while (cursor.moveToNext());
+        }
+
+        db.close();
+        return lstCategory;
+    }
+
+    public List<String> getAllStringCategory(String type){
+        List<String> lstCategory = new ArrayList<>();
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + TYPE + " LIKE " + type;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                lstCategory.add(cursor.getString(1));
             }while (cursor.moveToNext());
         }
 

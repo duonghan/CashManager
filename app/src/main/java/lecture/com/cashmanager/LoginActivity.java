@@ -2,6 +2,7 @@ package lecture.com.cashmanager;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -129,6 +130,11 @@ public class LoginActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("user", account);
         intent.putExtras(bundle);
+        // Save data to share preference
+        SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
+        editor.putString("name", account.getName());
+        editor.putString("email", account.getEmail());
+        editor.apply();
 
         startActivity(intent);
         finish();

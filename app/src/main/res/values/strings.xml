@@ -156,6 +156,9 @@
     <string name="add_ts_select_cate">Chọn danh mục</string>
     <string name="add_ts_note">Ghi chú</string>
     <string name="add_ts_today">Hôm nay</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>
