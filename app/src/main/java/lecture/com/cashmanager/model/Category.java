@@ -45,4 +45,9 @@ public class Category implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return("Name: " + this.name + ",Type: " + this.type);
+    }
 }

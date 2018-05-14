@@ -69,4 +69,7 @@
     <string name="add_ts_select_cate">Select category</string>
     <string name="add_ts_note">Note</string>
     <string name="add_ts_today">Today</string>
+    <string name="title_add_category">Add category</string>
+    <string name="hint_cate_name">Category Name</string>
+    <string name="menu_save">Save</string>
 </resources>

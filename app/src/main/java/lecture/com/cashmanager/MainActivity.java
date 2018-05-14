@@ -1,7 +1,5 @@
 package lecture.com.cashmanager;
 
-import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -16,21 +14,19 @@ import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
-
-import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.Locale;
 
+import lecture.com.cashmanager.authentication.LoginActivity;
+import lecture.com.cashmanager.dao.CategoryDAO;
 import lecture.com.cashmanager.menu.AboutFragment;
 import lecture.com.cashmanager.menu.CategoryActivity;
-import lecture.com.cashmanager.menu.CategoryFragment;
 import lecture.com.cashmanager.menu.DebtFragment;
 import lecture.com.cashmanager.menu.ReportFragment;
-import lecture.com.cashmanager.menu.SettingFragment;
-import lecture.com.cashmanager.menu.TransasctionsFragment;
+import lecture.com.cashmanager.menu.cashtransaction.TransasctionsFragment;
 import lecture.com.cashmanager.model.Account;
+import lecture.com.cashmanager.model.Category;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -51,8 +47,42 @@ public class MainActivity extends AppCompatActivity
 
         displayHomePage();
 
-        Intent intent = getIntent();
-        account = (Account) intent.getSerializableExtra("user");
+//        CategoryDAO categoryDAO = new CategoryDAO(getApplicationContext());
+//        String [] tmpList = {
+//                "Award"
+//                ,"Gifts"
+//                ,"InterestMoney"
+//                ,"Salary"
+//                ,"Selling"
+//                ,"Others"
+//                ,"Income"
+//                ,"Expense"
+//                ,"Bills and Utilities"
+//                ,"Entertainment"
+//                ,"Food and Beverage"
+//                ,"Business"
+//                ,"Gifts and Donations"
+//                ,"Health and Fitness"
+//                ,"Holidays"
+//                ,"Family"
+//                ,"Pets"
+//                ,"Shopping"
+//                ,"Educations"
+//                ,"Friends and Lovers"
+//                ,"Insurances"
+//                ,"Investment"
+//                ,"Transportation"
+//                ,"Travel"
+//                ,"Withdrawal"
+//                ,"Fees and Charges"
+//                ,"Debt"
+//                ,"Loan"
+//                ,"Debt and Loan"
+//                ,"Repayment"
+//                ,"Debt Collection"
+//        };
+//
+//        categoryDAO.addCategory(new Category(tmpList[0], "Income"));
 
     }
 
@@ -144,23 +174,12 @@ public class MainActivity extends AppCompatActivity
             ReportFragment mainfragment = new ReportFragment();
             initFragment(mainfragment);
         } else if (id == R.id.nav_categories) {
-//            CategoryFragment mainfragment = new CategoryFragment();
-//            initFragment(mainfragment);
             Intent category = new Intent(this, CategoryActivity.class);
             startActivity(category);
         } else if (id == R.id.nav_about) {
             AboutFragment mainfragment = new AboutFragment();
             initFragment(mainfragment);
         } else if (id == R.id.nav_setting) {
-//            SettingFragment mainfragment = new SettingFragment();
-//            initFragment(mainfragment);
-
-//            android.app.Fragment settingFragment = new SettingFragment();
-//            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//            if(savedInstanceState == null){
-//                fragmentTransaction.add(R.id.)
-//            }
-
             Intent setting = new Intent(this, SettingsActivity.class);
             startActivity(setting);
         }

@@ -1,4 +1,4 @@
-package lecture.com.cashmanager.menu;
+package lecture.com.cashmanager.menu.cashtransaction;
 
 
 import android.content.Intent;
@@ -19,7 +19,7 @@ import java.util.Calendar;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
-import lecture.com.cashmanager.AddTransactionActivity;
+import lecture.com.cashmanager.menu.cashtransaction.AddTransactionActivity;
 import lecture.com.cashmanager.R;
 
 

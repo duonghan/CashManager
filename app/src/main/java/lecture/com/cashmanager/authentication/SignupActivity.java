@@ -1,4 +1,4 @@
-package lecture.com.cashmanager;
+package lecture.com.cashmanager.authentication;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import lecture.com.cashmanager.R;
 import lecture.com.cashmanager.dao.AccountDAO;
 import lecture.com.cashmanager.model.Account;
 

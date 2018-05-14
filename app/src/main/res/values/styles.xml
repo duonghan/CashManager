@@ -63,4 +63,14 @@
         <item name="android:background">@android:color/black</item>
     </style>
 
+    <style name="AddCategoryTheme" parent="AppTheme.AppBarOverlay">
+        <item name="android:color">@color/malachite</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:layout_marginHorizontal">5dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+    </style>
+
 </resources>

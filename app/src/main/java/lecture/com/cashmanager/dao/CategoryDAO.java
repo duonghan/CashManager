@@ -17,7 +17,7 @@ import static android.content.ContentValues.TAG;
 public class CategoryDAO extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "cash_manager" ;
-    private static final String TABLE_NAME = "category" ;
+    private static final String TABLE_NAME = "cash_category" ;
     private static final String ID = "id" ;
     private static final String NAME = "name";
     private static final String TYPE = "type";
@@ -35,13 +35,13 @@ public class CategoryDAO extends SQLiteOpenHelper {
         super(context, DB_NAME, null, VERSION);
         this.context = context;
 
-        Log.d(TAG, "AccountDAO: ");
+        Log.d(TAG, ">>>>>>>>>>>>>>>>>>>>>>>>CategoryDAO: ");
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE);
-        Log.d(TAG, "On Create Database: ");
+        Log.d(TAG, "On Create Database: " + CREATE_TABLE);
     }
 
     @Override
@@ -56,10 +56,14 @@ public class CategoryDAO extends SQLiteOpenHelper {
         values.put(NAME, category.getName());
         values.put(TYPE, category.getType());
 
-        database.insert(TABLE_NAME, null, values);
+        if(database.insert(TABLE_NAME, null, values) != -1){
+            Log.d(TAG, "addCategory: Successful ");
+            Log.d(TAG, "Name: " + category.getName());
+            Log.d(TAG, "Type: " + category.getType());
+        }
         database.close();
 
-        Log.d(TAG, "addCategory: Successful ");
+
     }
 
     public List<Category> getAllCategory(String type){

@@ -1,4 +1,4 @@
-package lecture.com.cashmanager;
+package lecture.com.cashmanager.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(lecture.com.cashmanager.R.layout.activity_splash);
 
         handler = new Handler();
         handler.postDelayed(new Runnable() {
