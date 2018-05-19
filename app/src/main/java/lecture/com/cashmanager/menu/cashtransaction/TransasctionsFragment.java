@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +17,18 @@ import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import lecture.com.cashmanager.adapters.TransactionShowAdapter;
 import lecture.com.cashmanager.menu.cashtransaction.AddTransactionActivity;
 import lecture.com.cashmanager.R;
+import lecture.com.cashmanager.model.CashTransaction;
 
 
 /**
@@ -34,6 +42,10 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
     private FloatingActionButton fab_expense;
     private final int INCOME = 111;
     private final int EXPENSE = 111;
+
+    RecyclerView recyclerView;
+    List<CashTransaction> transactionList;
+    TransactionShowAdapter adapter;
 
 
     public TransasctionsFragment() {
@@ -80,6 +92,17 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
             }
 
         });
+
+        recyclerView = rootView.findViewById(R.id.listTransactions);
+        transactionList = initData(50);
+
+        adapter = new TransactionShowAdapter(getActivity(), transactionList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(adapter);
+        animationAdapter.setDuration(500);
+        recyclerView.setAdapter(animationAdapter);
+
         return rootView;
     }
 
@@ -101,5 +124,14 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
             default:
                 break;
         }
+    }
+
+    private List<CashTransaction> initData(int n){
+        List<CashTransaction> list = new ArrayList<>();
+        for (int i = 0; i< n; i++){
+            list.add(new CashTransaction(i,i,i,i,"Description", "Type"));
+        }
+
+        return list;
     }
 }

@@ -23,6 +23,15 @@ public class CashTransaction {
         this.modified = modified;
     }
 
+    public CashTransaction(int id, int userid, int categoryid, int value, String description, String type) {
+        this.id = id;
+        this.userid = userid;
+        this.categoryid = categoryid;
+        this.value = value;
+        this.description = description;
+        this.type = type;
+    }
+
     public CashTransaction(int userid, int categoryid, int value, String description, String type, Date created, Date modified) {
         this.userid = userid;
         this.categoryid = categoryid;
