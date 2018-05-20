@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="5dp"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="15dp"
-    android:padding="5dp">
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp">
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,49 +15,37 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/title_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/iron"
-            android:gravity="center_vertical"
-            android:text="contact det"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/name_textview"
+            android:id="@+id/txt_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title_textview"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
             android:gravity="center_vertical"
-            android:text="Name"
+            android:text="20/05/2018"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/surname_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/name_textview"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:text="Surname"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/email_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/name_textview"
+            android:id="@+id/txt_date_value"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="150dp"
-            android:layout_marginTop="10dp"
+            android:layout_alignBottom="@id/txt_date"
+            android:layout_marginEnd="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="Email"
+            android:text="450000"
             android:textSize="20sp" />
+
+        <View
+            android:id="@+id/first_line_1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/txt_date"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <ListView
+            android:id="@+id/lv_cash_item"
+            android:layout_below="@id/first_line_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </RelativeLayout>
 

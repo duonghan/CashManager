@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lecture.com.cashmanager.R;
@@ -36,11 +38,14 @@ public class TransactionShowAdapter extends RecyclerView.Adapter<TransactionShow
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CashTransaction transaction = transactionInfoList.get(position);
+        ArrayList<CashTransaction> arrCashTransaction = new ArrayList<>();
 
-        holder.vName.setText(transaction.getId()+ "");
-        holder.vSurname.setText(transaction.getUserid() + "");
-        holder.vEmail.setText(transaction.getValue() + "");
-        holder.vTitle.setText(transaction.getDescription() + " " + transaction.getType());
+        holder.txtDate.setText(transaction.getCreated().toString());
+        holder.txtDateValue.setText(String.valueOf(transaction.getValue()));
+
+        //TODO: Add month transaction
+        //TransactionDateAdapter dateAdapter = new TransactionDateAdapter(this, R.layout.transaction_row_item, arrCashTransaction);
+
     }
 
     @Override
@@ -48,21 +53,18 @@ public class TransactionShowAdapter extends RecyclerView.Adapter<TransactionShow
         return transactionInfoList.size();
     }
 
-    
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView vName;
-        private TextView vSurname;
-        private TextView vEmail;
-        private TextView vTitle;
+        private TextView txtDate;
+        private TextView txtDateValue;
+        private ListView lvCashItem;
 
         private ViewHolder(View itemView) {
             super(itemView);
 
-            vName = (TextView) itemView.findViewById(R.id.name_textview);
-            vSurname = (TextView) itemView.findViewById(R.id.surname_textview);
-            vEmail = (TextView) itemView.findViewById(R.id.email_textview);
-            vTitle = (TextView) itemView.findViewById(R.id.title_textview);
+            txtDate = itemView.findViewById(R.id.txt_date);
+            txtDateValue = itemView.findViewById(R.id.txt_date_value);
+            lvCashItem = itemView.findViewById(R.id.lv_cash_item);
         }
     }
 }

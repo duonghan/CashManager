@@ -104,4 +104,14 @@ public class CategoryDAO extends SQLiteOpenHelper {
         db.close();
         return lstCategory;
     }
+
+    public String getCategoryName(int id){
+        String query = "SELECT NAME from " + TABLE_NAME + " WHERE " + ID + " = " + id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst())
+            return cursor.getString(1);
+        return "Not found";
+    }
 }
