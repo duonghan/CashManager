@@ -41,7 +41,7 @@ public class AddCategoryActivity extends AppCompatActivity {
         bar.setTitle(R.string.title_add_category);
         bar.setDisplayHomeAsUpEnabled(true);
 
-        addItem();
+//        addItem();
     }
 
     @Override
@@ -76,31 +76,31 @@ public class AddCategoryActivity extends AppCompatActivity {
 //            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show();
 //        }
         
-        for(int i = 0 ; i< lstName.length; i++){
-            categoryDAO.addCategory(new Category(lstName[i], "Income"));
-        }
-
-        for(int i = 0 ; i< lstExpense.length; i++){
-            categoryDAO.addCategory(new Category(lstExpense[i], "Expense"));
-        }
-
-        List<String> listCategory =  categoryDAO.getAllStringCategory("Income");
-        listCategory.toArray();
+//        for(int i = 0 ; i< lstName.length; i++){
+//            categoryDAO.addCategory(new Category(lstName[i], "Income"));
+//        }
+//
+//        for(int i = 0 ; i< lstExpense.length; i++){
+//            categoryDAO.addCategory(new Category(lstExpense[i], "Expense"));
+//        }
+//
+//        List<String> listCategory =  categoryDAO.getAllStringCategory("Income");
+//        listCategory.toArray();
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void addItem(){
-        Category [] lstCategory;
-        CategoryDAO categoryDAO = new CategoryDAO(this);
-
-        String [] lstName = {"Award", "Gifts", "InterestMoney", "Salary", "Selling",
-                "Others", };
-        String [] lstExpense = {"Bills_and_Utilities", "Entertainment", "Food_and_Beverage",
-                "Business", "Gifts_and_Donations", "Health_and_Fitness", "Holidays",
-                "Family", "Pets", "Shopping", "Educations", "Friends_and_Lovers",
-                "Insurances", "Investment", "Transportation", "Travel", "Withdrawal"};
-
+//    public void addItem(){
+//        Category [] lstCategory;
+//        CategoryDAO categoryDAO = new CategoryDAO(this);
+//
+//        String [] lstName = {"Award", "Gifts", "InterestMoney", "Salary", "Selling",
+//                "Others", };
+//        String [] lstExpense = {"Bills_and_Utilities", "Entertainment", "Food_and_Beverage",
+//                "Business", "Gifts_and_Donations", "Health_and_Fitness", "Holidays",
+//                "Family", "Pets", "Shopping", "Educations", "Friends_and_Lovers",
+//                "Insurances", "Investment", "Transportation", "Travel", "Withdrawal"};
+//
 //        if (item.getItemId() == R.id.action_save){
 //            int rdoChecked = rdoType.getCheckedRadioButtonId();
 //
@@ -111,17 +111,17 @@ public class AddCategoryActivity extends AppCompatActivity {
 //
 //            Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show();
 //        }
-
-        for(int i = 0 ; i< lstName.length; i++){
-            categoryDAO.addCategory(new Category(lstName[i], "Income"));
-        }
-
-        for(int i = 0 ; i< lstExpense.length; i++){
-            categoryDAO.addCategory(new Category(lstExpense[i], "Expense"));
-        }
-
-        List<String> listCategory =  categoryDAO.getAllStringCategory("Income");
-        listCategory.toArray();
-    }
+//
+//        for(int i = 0 ; i< lstName.length; i++){
+//            categoryDAO.addCategory(new Category(lstName[i], "Income"));
+//        }
+//
+//        for(int i = 0 ; i< lstExpense.length; i++){
+//            categoryDAO.addCategory(new Category(lstExpense[i], "Expense"));
+//        }
+//
+//        List<String> listCategory =  categoryDAO.getAllStringCategory("Income");
+//        listCategory.toArray();
+//    }
 
 }

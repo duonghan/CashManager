@@ -74,7 +74,7 @@ public class AccountDAO extends SQLiteOpenHelper{
                         USERNAME + " = \'" + username +
                         "\' AND " + PASSWORD + " = \'" + password + "\'";
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
         if(cursor.moveToFirst()){
@@ -100,6 +100,32 @@ public class AccountDAO extends SQLiteOpenHelper{
         if(cursor.getCount() == 0) return false;
 
         return true;
+    }
+
+    public int updateAccount(Account account){
+        Log.d(TAG, "update category " + account.getName());
+        int resullt = -1;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(NAME, account.getName());
+        values.put(PASSWORD, account.getPassword());
+        values.put(EMAIL, account.getEmail());
+
+        resullt = db.update(TABLE_NAME, values, ID + " =? ",
+                new String[]{String.valueOf(account.getId())});
+        db.close();
+
+        return resullt;
+    }
+
+    public void deleteAccount(Account account){
+        Log.d(TAG, "delete category " + account.getName());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, ID + " =? ",
+                new String[] { String.valueOf(account.getId())});
+        db.close();
     }
 
 }

@@ -129,7 +129,7 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
     private List<CashTransaction> initData(int n){
         List<CashTransaction> list = new ArrayList<>();
         for (int i = 0; i< n; i++){
-            list.add(new CashTransaction(i,i,i,i,"Description", "Type"));
+            list.add(new CashTransaction(i,i,i,i,"Description", "05/05/2018", "15/05/2018"));
         }
 
         return list;

@@ -1,48 +1,37 @@
 package lecture.com.cashmanager.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CashTransaction {
+public class CashTransaction implements Serializable{
     private int id;
     private int userid;
     private int categoryid;
     private int value;
     private String description;
-    private String type;
-    private Date created;
-    private Date modified;
-
-    public CashTransaction(int id, int userid, int categoryid, int value, String description, String type, Date created, Date modified) {
-        this.id = id;
-        this.userid = userid;
-        this.categoryid = categoryid;
-        this.value = value;
-        this.description = description;
-        this.type = type;
-        this.created = created;
-        this.modified = modified;
-    }
-
-    public CashTransaction(int id, int userid, int categoryid, int value, String description, String type) {
-        this.id = id;
-        this.userid = userid;
-        this.categoryid = categoryid;
-        this.value = value;
-        this.description = description;
-        this.type = type;
-    }
-
-    public CashTransaction(int userid, int categoryid, int value, String description, String type, Date created, Date modified) {
-        this.userid = userid;
-        this.categoryid = categoryid;
-        this.value = value;
-        this.description = description;
-        this.type = type;
-        this.created = created;
-        this.modified = modified;
-    }
+    private String created;
+    private String modified;
 
     public CashTransaction() {
+    }
+
+    public CashTransaction(int userid, int categoryid, int value, String description, String created, String modified) {
+        this.userid = userid;
+        this.categoryid = categoryid;
+        this.value = value;
+        this.description = description;
+        this.created = created;
+        this.modified = modified;
+    }
+
+    public CashTransaction(int id, int userid, int categoryid, int value, String description, String created, String modified) {
+        this.id = id;
+        this.userid = userid;
+        this.categoryid = categoryid;
+        this.value = value;
+        this.description = description;
+        this.created = created;
+        this.modified = modified;
     }
 
     public int getId() {
@@ -85,27 +74,19 @@ public class CashTransaction {
         this.description = description;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Date getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 
-    public Date getModified() {
+    public String getModified() {
         return modified;
     }
 
-    public void setModified(Date modified) {
+    public void setModified(String modified) {
         this.modified = modified;
     }
 }

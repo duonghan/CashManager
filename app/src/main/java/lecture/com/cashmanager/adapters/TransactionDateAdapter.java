@@ -48,15 +48,15 @@ public class TransactionDateAdapter extends ArrayAdapter<CashTransaction>{
         }
 
         CashTransaction cashTransaction = arrCashTransaction.get(position);
-        holder.categoryName.setText(new CategoryDAO(getContext()).getCategoryName(cashTransaction.getCategoryid()));
-        holder.categoryValue.setText(cashTransaction.getValue());
-        holder.categoryNote.setText(cashTransaction.getDescription());
-
-        if(cashTransaction.getType().equals("Income")){
-            holder.categoryValue.setTextColor(convertView.getResources().getColor(R.color.tb_tiffany_blue));
-        }else{
-            holder.categoryValue.setTextColor(convertView.getResources().getColor(R.color.red));
-        }
+//        holder.categoryName.setText(new CategoryDAO(getContext()).getCategoryName(cashTransaction.getCategoryid()));
+//        holder.categoryValue.setText(cashTransaction.getValue());
+//        holder.categoryNote.setText(cashTransaction.getDescription());
+//
+//        if(cashTransaction.getType().equals("Income")){
+//            holder.categoryValue.setTextColor(convertView.getResources().getColor(R.color.tb_tiffany_blue));
+//        }else{
+//            holder.categoryValue.setTextColor(convertView.getResources().getColor(R.color.red));
+//        }
 
         return convertView;
     }
