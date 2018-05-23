@@ -12,9 +12,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import lecture.com.cashmanager.R;
-import lecture.com.cashmanager.dao.CategoryDAO;
+import lecture.com.cashmanager.db.DBHelper;
 import lecture.com.cashmanager.model.CashTransaction;
-import lecture.com.cashmanager.model.Category;
 
 public class TransactionDateAdapter extends ArrayAdapter<CashTransaction>{
     private Context context;
@@ -48,7 +47,7 @@ public class TransactionDateAdapter extends ArrayAdapter<CashTransaction>{
         }
 
         CashTransaction cashTransaction = arrCashTransaction.get(position);
-//        holder.categoryName.setText(new CategoryDAO(getContext()).getCategoryName(cashTransaction.getCategoryid()));
+//        holder.categoryName.setText(new DBHelper(getContext()).getCategoryName(cashTransaction.getCategoryid()));
 //        holder.categoryValue.setText(cashTransaction.getValue());
 //        holder.categoryNote.setText(cashTransaction.getDescription());
 //

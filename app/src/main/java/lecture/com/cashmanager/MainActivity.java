@@ -19,14 +19,13 @@ import android.widget.TextView;
 import java.util.Locale;
 
 import lecture.com.cashmanager.authentication.LoginActivity;
-import lecture.com.cashmanager.dao.CategoryDAO;
+import lecture.com.cashmanager.db.DBHelper;
 import lecture.com.cashmanager.menu.AboutFragment;
 import lecture.com.cashmanager.menu.CategoryActivity;
 import lecture.com.cashmanager.menu.DebtFragment;
 import lecture.com.cashmanager.menu.ReportFragment;
 import lecture.com.cashmanager.menu.cashtransaction.TransasctionsFragment;
 import lecture.com.cashmanager.model.Account;
-import lecture.com.cashmanager.model.Category;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity
 
         displayHomePage();
 
-//        CategoryDAO categoryDAO = new CategoryDAO(getApplicationContext());
+//        DBHelper categoryDAO = new DBHelper(getApplicationContext());
 //        String [] tmpList = {
 //                "Award"
 //                ,"Gifts"

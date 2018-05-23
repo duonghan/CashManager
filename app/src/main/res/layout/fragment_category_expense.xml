@@ -3,12 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context=".menu.category.CategoryExpense">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/lv_category_expense"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Expense" />
+        android:layout_height="wrap_content" />
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab_expense_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_fab_income"
+        fab:fab_colorNormal="@color/primary"
+        fab:fab_colorPressed="@color/pink_pressed"
+        fab:fab_colorRipple="@color/ceil"
+        fab:fab_shadow="false"/>
 
 </FrameLayout>

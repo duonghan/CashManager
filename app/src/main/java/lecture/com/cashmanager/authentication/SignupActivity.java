@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import lecture.com.cashmanager.R;
-import lecture.com.cashmanager.dao.AccountDAO;
+import lecture.com.cashmanager.db.DBHelper;
 import lecture.com.cashmanager.model.Account;
 
 public class SignupActivity extends AppCompatActivity {
@@ -85,7 +85,7 @@ public class SignupActivity extends AppCompatActivity {
 
         //Implement signup logic.
         Account acc = new Account(username, password, name, email);
-        AccountDAO accountDAO = new AccountDAO(this);
+        DBHelper accountDAO = new DBHelper(this);
         accountDAO.addAccount(acc);
 
         new android.os.Handler().postDelayed(

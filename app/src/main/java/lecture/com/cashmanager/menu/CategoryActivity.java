@@ -48,7 +48,6 @@ public class CategoryActivity extends AppCompatActivity {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new CategoryIncome(), getString(R.string.txt_Income));
         adapter.addFragment(new CategoryExpense(), getString(R.string.txt_Expense));
-        adapter.addFragment(new CategoryDebt(), getString(R.string.debt));
 
         viewPager.setAdapter(adapter);
     }
@@ -56,6 +55,5 @@ public class CategoryActivity extends AppCompatActivity {
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
-        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
     }
 }

@@ -1,23 +1,17 @@
 package lecture.com.cashmanager.menu;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
-
-import java.io.Console;
-import java.util.List;
 
 import lecture.com.cashmanager.R;
-import lecture.com.cashmanager.dao.CategoryDAO;
+import lecture.com.cashmanager.db.DBHelper;
 import lecture.com.cashmanager.model.Category;
 
 public class AddCategoryActivity extends AppCompatActivity {
@@ -56,7 +50,7 @@ public class AddCategoryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         Category [] lstCategory;
-        CategoryDAO categoryDAO = new CategoryDAO(this);
+        DBHelper categoryDAO = new DBHelper(this);
 
         String [] lstName = {"Award", "Gifts", "InterestMoney", "Salary", "Selling",
                             "Others", };
@@ -92,7 +86,7 @@ public class AddCategoryActivity extends AppCompatActivity {
 
 //    public void addItem(){
 //        Category [] lstCategory;
-//        CategoryDAO categoryDAO = new CategoryDAO(this);
+//        DBHelper categoryDAO = new DBHelper(this);
 //
 //        String [] lstName = {"Award", "Gifts", "InterestMoney", "Salary", "Selling",
 //                "Others", };

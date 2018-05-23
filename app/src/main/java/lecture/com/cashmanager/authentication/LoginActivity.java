@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import lecture.com.cashmanager.MainActivity;
 import lecture.com.cashmanager.R;
-import lecture.com.cashmanager.dao.AccountDAO;
+import lecture.com.cashmanager.db.DBHelper;
 import lecture.com.cashmanager.model.Account;
 
 public class LoginActivity extends AppCompatActivity {
@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString().trim();
 
         //authentication logic.
-        final AccountDAO accountDAO = new AccountDAO(this);
+        final DBHelper accountDAO = new DBHelper(this);
         account = accountDAO.getAccount(username, password);
 
         if(account == null){
