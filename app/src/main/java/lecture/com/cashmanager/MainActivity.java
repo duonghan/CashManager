@@ -45,44 +45,6 @@ public class MainActivity extends AppCompatActivity
         initFragment(mainfragment);
 
         displayHomePage();
-
-//        DBHelper categoryDAO = new DBHelper(getApplicationContext());
-//        String [] tmpList = {
-//                "Award"
-//                ,"Gifts"
-//                ,"InterestMoney"
-//                ,"Salary"
-//                ,"Selling"
-//                ,"Others"
-//                ,"Income"
-//                ,"Expense"
-//                ,"Bills and Utilities"
-//                ,"Entertainment"
-//                ,"Food and Beverage"
-//                ,"Business"
-//                ,"Gifts and Donations"
-//                ,"Health and Fitness"
-//                ,"Holidays"
-//                ,"Family"
-//                ,"Pets"
-//                ,"Shopping"
-//                ,"Educations"
-//                ,"Friends and Lovers"
-//                ,"Insurances"
-//                ,"Investment"
-//                ,"Transportation"
-//                ,"Travel"
-//                ,"Withdrawal"
-//                ,"Fees and Charges"
-//                ,"Debt"
-//                ,"Loan"
-//                ,"Debt and Loan"
-//                ,"Repayment"
-//                ,"Debt Collection"
-//        };
-//
-//        categoryDAO.addCategory(new Category(tmpList[0], "Income"));
-
     }
 
     private void initFragment(Fragment fragment){

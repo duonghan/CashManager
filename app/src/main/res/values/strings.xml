@@ -162,6 +162,7 @@
     <string name="title_add_category">Thêm khoản mục</string>
     <string name="hint_cate_name">Tên khoản mục</string>
     <string name="menu_save">Lưu</string>
+    <string name="title_context_menu">Chọn chức năng</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

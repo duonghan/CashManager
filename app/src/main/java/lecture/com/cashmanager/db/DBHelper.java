@@ -10,6 +10,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import lecture.com.cashmanager.R;
 import lecture.com.cashmanager.entity.CashInfo;
 import lecture.com.cashmanager.model.Account;
 import lecture.com.cashmanager.model.CashTransaction;
@@ -215,11 +216,20 @@ public class DBHelper extends SQLiteOpenHelper {
         int count = this.getCategoryCount();
         if(count == 0){
 
-            String [] incomeEntries = {"Award","Gifts","InterestMoney","Salary","Selling","Others"};
-            String [] expenseEntries = {"Bills and Utilities","Entertainment","Food and Beverage","Business"
-                    ,"Gifts and Donations","Health and Fitness","Holidays","Family","Pets","Shopping","Educations"
-                    ,"Friends and Lovers","Insurances","Investment","Transportation","Travel"
-                    ,"Withdrawal","Fees and Charges","Repayment","Debt Collection"};
+//            String [] incomeEntries = {"Award","Gifts","InterestMoney","Salary","Selling",
+//                    "Others","Debt", "Debt Collection"};
+
+//            String [] expenseEntries = {"Bills_and_Utilities","Entertainment","Food_and_Beverage",
+//                    "Business","Gifts_and_Donations","Health_and_Fitness","Holidays","Family",
+//                    "Pets","Shopping","Educations","Friends_and_Lovers","Insurances","Investment",
+//                    "Transportation","Travel","Withdrawal","Fees_and_Charges","Repayment",
+//                    "Debt_Collection", "Loan", "Repayment"};
+            String [] incomeEntries = {"Thưởng","Được tặng","Tiền lãi","Lương","Bán đồ","Đi vay", "Thu nợ", "Khác"};
+
+            String [] expenseEntries = {"Hóa đơn và Tiện ích","Giải trí","Ăn uống",
+                    "Kinh doanh","Quà tăng và Từ thiện","Sức khỏe","Nghỉ lễ","Gia đình",
+                    "Vật nuôi","Mua sắm","Giáo dục","Người yêu và Bạn bè","Bảo hiểm","Đầu tư",
+                    "Di chuyển","Du lịch","Rút tiền","Chi phí","Trả nợ", "Cho vay"};
 
             // Add income entries to database
             for (String entry: incomeEntries) {
@@ -227,7 +237,7 @@ public class DBHelper extends SQLiteOpenHelper {
             }
 
             // Add expense entries to database
-            for (String entry: incomeEntries) {
+            for (String entry: expenseEntries) {
                 this.addCategory(new Category(entry, -1));
             }
         }

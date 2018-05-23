@@ -1,15 +1,22 @@
 package lecture.com.cashmanager.menu.category;
 
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -17,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lecture.com.cashmanager.R;
+import lecture.com.cashmanager.adapters.CategoryShowAdapter;
 import lecture.com.cashmanager.db.DBHelper;
 import lecture.com.cashmanager.menu.AddCategoryActivity;
 import lecture.com.cashmanager.model.Category;
@@ -27,10 +35,17 @@ import lecture.com.cashmanager.model.Category;
 public class CategoryIncome extends Fragment {
 
     public final int ADD_INCOME = 111;
+    public final int INCOME = 1;
+    private static final int MENU_ITEM_VIEW = 110;
+    private static final int MENU_ITEM_EDIT = 220;
+    private static final int MENU_ITEM_CREATE = 330;
+    private static final int MENU_ITEM_DELETE = 440;
+
+    private static final int MY_REQUEST_CODE = 1000;
 
     DBHelper categoryDAO;
     List<Category> listIncome = new ArrayList<>();
-    ArrayAdapter<Category> arrayAdapter;
+    CategoryShowAdapter arrayAdapter;
     ListView listView;
     FloatingActionButton fab;
 
@@ -51,9 +66,9 @@ public class CategoryIncome extends Fragment {
         categoryDAO = new DBHelper(getContext());
         categoryDAO.createDefaultCategory();
 
-        listIncome = categoryDAO.getAllCategoryByType(1);
+        listIncome = categoryDAO.getAllCategoryByType(INCOME);
 
-        this.arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, this.listIncome);
+        this.arrayAdapter = new CategoryShowAdapter(getActivity(), R.layout.list_view_custom_category, this.listIncome);
 
         this.listView.setAdapter(arrayAdapter);
         registerForContextMenu(this.listView);
@@ -77,4 +92,81 @@ public class CategoryIncome extends Fragment {
         return view;
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle(getString(R.string.title_context_menu));
+
+        // groupId, itemId, order, title
+        menu.add(0, MENU_ITEM_VIEW , 0, "View Note");
+        menu.add(0, MENU_ITEM_CREATE , 1, "Create Note");
+        menu.add(0, MENU_ITEM_EDIT , 2, "Edit Note");
+        menu.add(0, MENU_ITEM_DELETE, 4, "Delete Note");
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo
+                info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        final Category selectedCategory = (Category) this.listView.getItemAtPosition(info.position);
+
+        if(item.getItemId() == MENU_ITEM_VIEW){
+            Toast.makeText(getContext(),selectedCategory.getName(),Toast.LENGTH_LONG).show();
+        }
+        else if(item.getItemId() == MENU_ITEM_CREATE){
+            Intent intent = new Intent(getActivity(), AddCategoryActivity.class);
+
+            // Start AddEditNoteActivity, có phản hồi.
+            this.startActivityForResult(intent, MY_REQUEST_CODE);
+        }
+        else if(item.getItemId() == MENU_ITEM_EDIT ){
+            Intent intent = new Intent(getActivity(), AddCategoryActivity.class);
+            intent.putExtra("note", selectedCategory);
+
+            // Start AddEditNoteActivity, có phản hồi.
+            this.startActivityForResult(intent,MY_REQUEST_CODE);
+        }
+        else if(item.getItemId() == MENU_ITEM_DELETE){
+            // Hỏi trước khi xóa.
+            new AlertDialog.Builder(getContext())
+                    .setMessage(selectedCategory.getName()+". Are you sure you want to delete?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            deleteCategory(selectedCategory);
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        }
+        else {
+            return false;
+        }
+        return true;
+    }
+
+    private void deleteCategory(Category selectedCategory) {
+        DBHelper db = new DBHelper(getContext());
+        db.deleteCategory(selectedCategory.getId(), true);
+        this.listIncome.remove(selectedCategory);
+        // Refresh ListView.
+        this.arrayAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE ) {
+            boolean needRefresh = data.getBooleanExtra("needRefresh",true);
+            // Refresh ListView
+            if(needRefresh) {
+                this.listIncome.clear();
+                DBHelper db = new DBHelper(getContext());
+                List<Category> list=  db.getAllCategoryByType(INCOME);
+                this.listIncome.addAll(list);
+                // Thông báo dữ liệu thay đổi (Để refresh ListView).
+                this.arrayAdapter.notifyDataSetChanged();
+            }
+        }
+    }
 }
