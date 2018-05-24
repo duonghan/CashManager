@@ -59,7 +59,7 @@ public class CategoryExpense extends Fragment {
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, listIncome);
 //        listView.setAdapter(adapter);
 //
-//        fab.attachToListView(listView);
+        fab.attachToListView(listView);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

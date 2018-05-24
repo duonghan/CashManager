@@ -4,66 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/iron"
     tools:context=".menu.AddCategoryActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:id="@+id/app_bar_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:theme="@style/CustomToolbarStyle">-->
+
+        <!--<include-->
+            <!--android:id="@+id/app_bar_add_category"-->
+            <!--layout="@layout/app_bar" />-->
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+    <android.support.v7.widget.CardView
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:theme="@style/CustomToolbarStyle">
-
-        <include
-            android:id="@+id/app_bar_add_category"
-            layout="@layout/app_bar" />
-    </android.support.design.widget.AppBarLayout>
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical" >
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="5dp"
+        android:layout_margin="5dp">
 
-        <EditText
-            android:textColor="@android:color/black"
-            android:id="@+id/add_cate_name"
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="17sp"
-            android:hint="@string/hint_cate_name"
-            android:textColorHint="@color/iron"
-            android:gravity="center"
-            android:focusedByDefault="true"/>
-        <requestFocus />
+            android:layout_margin="20dp">
 
-        <RadioGroup
-            android:id="@+id/rdo_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <RadioButton
-                android:id="@+id/rdo_income"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+            <EditText
+                android:id="@+id/add_cate_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="20dp"
+                android:drawableStart="@drawable/ic_menu_categories"
+                android:focusedByDefault="true"
+                android:shadowColor="@android:color/black"
+                android:hint="@string/txt_enter_category"
                 android:textColor="@android:color/black"
-                android:buttonTint="@color/malachite"
-                android:textSize="17sp"
-                android:text="@string/txt_Income"/>
+                android:textSize="@dimen/text" />
 
-            <RadioButton
-                android:id="@+id/rdo_expense"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textColor="@android:color/black"
-                android:buttonTint="@color/malachite"
-                android:textSize="17sp"
-                android:text="@string/txt_Expense"/>
-
-        </RadioGroup>
-
-    </LinearLayout>
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>

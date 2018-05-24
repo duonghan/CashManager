@@ -73,4 +73,5 @@
     <string name="hint_cate_name">Category Name</string>
     <string name="menu_save">Save</string>
     <string name="title_context_menu">Select The Action</string>
+    <string name="txt_enter_category">Enter category name here</string>
 </resources>

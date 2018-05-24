@@ -48,7 +48,8 @@
         </activity>
         <activity
             android:name=".menu.AddCategoryActivity"
-            android:parentActivityName=".menu.CategoryActivity">
+            android:parentActivityName=".menu.CategoryActivity"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".menu.CategoryActivity" />

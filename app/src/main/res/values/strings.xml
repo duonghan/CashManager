@@ -163,6 +163,7 @@
     <string name="hint_cate_name">Tên khoản mục</string>
     <string name="menu_save">Lưu</string>
     <string name="title_context_menu">Chọn chức năng</string>
+    <string name="txt_enter_category">Nhập tên khoản mục tại đây</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>
