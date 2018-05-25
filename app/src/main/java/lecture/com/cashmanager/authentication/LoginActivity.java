@@ -3,8 +3,9 @@ package lecture.com.cashmanager.authentication;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import dmax.dialog.SpotsDialog;
 import lecture.com.cashmanager.MainActivity;
 import lecture.com.cashmanager.R;
 import lecture.com.cashmanager.db.DBHelper;
@@ -78,11 +80,14 @@ public class LoginActivity extends AppCompatActivity {
 
         _loginButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage(getString(R.string.authenticating));
-        progressDialog.show();
+//        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+//                R.style.AppTheme_Dark_Dialog);
+//        progressDialog.setIndeterminate(true);
+//        progressDialog.setMessage(getString(R.string.authenticating));
+//        progressDialog.show();
+
+        final SpotsDialog dialog = new SpotsDialog(this, R.style.AppTheme_Login_Dialog);
+        dialog.show();
 
         final String username = _usernameText.getText().toString().trim();
         String password = _passwordText.getText().toString().trim();
@@ -102,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                     // On complete call either onLoginSuccess or onLoginFailed
                     onLoginSuccess();
                     // onLoginFailed();
-                    progressDialog.dismiss();
+                    dialog.dismiss();
                 }
             }, 2000);
     }

@@ -39,7 +39,7 @@
                         android:id="@+id/add_cate_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="20dp"
+                        android:paddingStart="10dp"
                         android:focusedByDefault="true"
                         android:shadowColor="@android:color/black"
                         android:hint="@string/txt_enter_category"

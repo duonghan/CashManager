@@ -14,7 +14,11 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".authentication.SignupActivity" />
-        <activity android:name=".authentication.LoginActivity" />
+
+        <activity
+            android:name=".authentication.LoginActivity"
+            android:windowSoftInputMode="adjustResize"/>
+
         <activity android:name=".authentication.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
