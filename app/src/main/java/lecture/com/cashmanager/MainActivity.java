@@ -19,11 +19,10 @@ import android.widget.TextView;
 import java.util.Locale;
 
 import lecture.com.cashmanager.authentication.LoginActivity;
-import lecture.com.cashmanager.db.DBHelper;
-import lecture.com.cashmanager.menu.AboutFragment;
+import lecture.com.cashmanager.menu.AboutActivity;
 import lecture.com.cashmanager.menu.CategoryActivity;
-import lecture.com.cashmanager.menu.DebtFragment;
-import lecture.com.cashmanager.menu.ReportFragment;
+import lecture.com.cashmanager.menu.DebtActivity;
+import lecture.com.cashmanager.menu.ReportActivity;
 import lecture.com.cashmanager.menu.cashtransaction.TransasctionsFragment;
 import lecture.com.cashmanager.model.Account;
 
@@ -129,17 +128,17 @@ public class MainActivity extends AppCompatActivity
             TransasctionsFragment mainfragment = new TransasctionsFragment();
             initFragment(mainfragment);
         } else if (id == R.id.nav_debts) {
-            DebtFragment mainfragment = new DebtFragment();
-            initFragment(mainfragment);
+            Intent debt = new Intent(this, DebtActivity.class);
+            startActivity(debt);
         } else if (id == R.id.nav_report) {
-            ReportFragment mainfragment = new ReportFragment();
-            initFragment(mainfragment);
+            Intent report = new Intent(this, ReportActivity.class);
+            startActivity(report);
         } else if (id == R.id.nav_categories) {
             Intent category = new Intent(this, CategoryActivity.class);
             startActivity(category);
         } else if (id == R.id.nav_about) {
-            AboutFragment mainfragment = new AboutFragment();
-            initFragment(mainfragment);
+            Intent about = new Intent(this, AboutActivity.class);
+            startActivity(about);
         } else if (id == R.id.nav_setting) {
             Intent setting = new Intent(this, SettingsActivity.class);
             startActivity(setting);

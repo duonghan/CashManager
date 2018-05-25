@@ -24,6 +24,7 @@
         </activity>
         <activity
             android:name=".menu.cashtransaction.AddTransactionActivity"
+            android:label="@string/title_header_transaction_add"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme">
             <meta-data
@@ -48,12 +49,28 @@
         </activity>
         <activity
             android:name=".menu.AddCategoryActivity"
+            android:label="@string/title_header_category_add"
             android:parentActivityName=".menu.CategoryActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".menu.CategoryActivity" />
         </activity>
+        <activity
+            android:name=".menu.ReportActivity"
+            android:theme="@style/AppTheme"
+            android:label="@string/report"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".menu.DebtActivity"
+            android:theme="@style/AppTheme"
+            android:label="@string/debt"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".menu.AboutActivity"
+            android:theme="@style/AppTheme"
+            android:label="@string/about"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>

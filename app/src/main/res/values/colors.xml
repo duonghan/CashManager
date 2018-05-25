@@ -16,6 +16,7 @@
     <color name="background">#e5e5e5</color>
     <color name="half_black">#808080</color>
     <color name="grey">#3e3e3e</color>
+    <color name="grey_bg">#e9ebee</color>
     <color name="yellow">#e9bd0f</color>
     <color name="red">#ec2020</color>
     <color name="green">#7ad624</color>

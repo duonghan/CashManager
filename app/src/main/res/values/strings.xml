@@ -163,7 +163,15 @@
     <string name="hint_cate_name">Tên khoản mục</string>
     <string name="menu_save">Lưu</string>
     <string name="title_context_menu">Chọn chức năng</string>
-    <string name="txt_enter_category">Nhập tên khoản mục tại đây</string>
+    <string name="txt_enter_category">Nhập tên khoản mục</string>
+    <string name="title_header_category_add">Thêm khoản mục</string>
+    <string name="title_header_transaction_add">Thêm giao dịch</string>
+    <string name="txt_version">Phiên bản 1.0.304</string>
+    <string name="txt_author">bởi Hàn Dương</string>
+    <string name="txt_copyright_symbol" translatable="false">© 2018</string>
+    <string name="txt_about_share_title">Chia sẻ qua</string>
+    <string name="txt_bbm_qr_pin" translatable="false">PIN: 2BFE6A3A</string>
+    <string name="txt_title_header_bbm" translatable="false">Black Berry Messener</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

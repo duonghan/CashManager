@@ -73,5 +73,10 @@
     <string name="hint_cate_name">Category Name</string>
     <string name="menu_save">Save</string>
     <string name="title_context_menu">Select The Action</string>
-    <string name="txt_enter_category">Enter category name here</string>
+    <string name="txt_enter_category">Enter category name</string>
+    <string name="title_header_category_add">Add category</string>
+    <string name="title_header_transaction_add">Add transaction</string>
+    <string name="txt_version">Version 1.0.304</string>
+    <string name="txt_author">by Hàn Dương</string>
+    <string name="txt_about_share_title">Share via</string>
 </resources>

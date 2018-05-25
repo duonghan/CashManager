@@ -26,14 +26,22 @@
     </android.support.design.widget.AppBarLayout>
 
     <!--When no any transaction-->
-    <!--<include-->
-        <!--layout="@layout/fm_no_transaction" />-->
+    <include
+        layout="@layout/fm_no_transaction"
+        android:visibility="invisible"/>
+
+    <include
+        android:layout_below="@id/appBar"
+        android:id="@+id/transaction_overview"
+        layout="@layout/transaction_overview_show_item"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listTransactions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/appBar"/>
+        android:layout_below="@id/transaction_overview"/>
 
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
@@ -41,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/fab_margin"
         fab:fab_addButtonColorNormal="@color/yellow"
         fab:fab_addButtonColorPressed="@color/grey"
