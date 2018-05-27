@@ -1,5 +1,6 @@
 package lecture.com.cashmanager;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -14,6 +15,7 @@ import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -21,7 +23,6 @@ import java.util.Locale;
 import lecture.com.cashmanager.authentication.LoginActivity;
 import lecture.com.cashmanager.menu.AboutActivity;
 import lecture.com.cashmanager.menu.CategoryActivity;
-import lecture.com.cashmanager.menu.DebtActivity;
 import lecture.com.cashmanager.menu.ReportActivity;
 import lecture.com.cashmanager.menu.cashtransaction.TransasctionsFragment;
 import lecture.com.cashmanager.model.Account;
@@ -29,7 +30,6 @@ import lecture.com.cashmanager.model.Account;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    Account account;
     TextView txtName;
     TextView txtEmail;
 
@@ -66,12 +66,12 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         // Inflate the layout for this fragment
-//        txtName = (TextView)findViewById(R.id.nav_header_name);
-//        txtEmail = (TextView)findViewById(R.id.nav_header_email);
-//        SharedPreferences preferences = getSharedPreferences("user", Activity.MODE_PRIVATE);
-//
-//        txtName.setText(preferences.getString("name", "John Cena"));
-//        txtEmail.setText(preferences.getString("email", "example@gmail.com"));
+        View headerView = navigationView.getHeaderView(0);
+        txtName = (TextView)headerView.findViewById(R.id.nav_header_name);
+        txtEmail = (TextView)headerView.findViewById(R.id.nav_header_email);
+        SharedPreferences preferences = getSharedPreferences("user", Activity.MODE_PRIVATE);
+        txtName.setText(preferences.getString("name", "John Cena"));
+        txtEmail.setText(preferences.getString("email", "example@gmail.com"));
 
     }
 
@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.action_logout) {
             Intent intent = new Intent(this, LoginActivity.class);
-            intent.putExtra("username", account.getUsername());
 
             startActivity(intent);
             finish();
@@ -127,10 +126,10 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_transactions) {
             TransasctionsFragment mainfragment = new TransasctionsFragment();
             initFragment(mainfragment);
-        } else if (id == R.id.nav_debts) {
-            Intent debt = new Intent(this, DebtActivity.class);
-            startActivity(debt);
-        } else if (id == R.id.nav_report) {
+//        } else if (id == R.id.nav_debts) {
+//            Intent debt = new Intent(this, DebtActivity.class);
+//            startActivity(debt);
+        }else if (id == R.id.nav_report) {
             Intent report = new Intent(this, ReportActivity.class);
             startActivity(report);
         } else if (id == R.id.nav_categories) {

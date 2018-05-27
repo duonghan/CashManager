@@ -1,4 +1,4 @@
-package lecture.com.cashmanager.menu.category;
+package lecture.com.cashmanager.menu.debt;
 
 
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import lecture.com.cashmanager.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoryDebt extends Fragment {
+public class DebtReceivableFragment extends Fragment {
 
 
-    public CategoryDebt() {
+    public DebtReceivableFragment() {
         // Required empty public constructor
     }
 
@@ -25,7 +25,7 @@ public class CategoryDebt extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category_debt, container, false);
+        return inflater.inflate(R.layout.fragment_debt_receivable, container, false);
     }
 
 }

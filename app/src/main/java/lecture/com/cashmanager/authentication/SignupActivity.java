@@ -2,8 +2,8 @@ package lecture.com.cashmanager.authentication;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,14 +11,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import dmax.dialog.SpotsDialog;
 import lecture.com.cashmanager.R;
+import lecture.com.cashmanager.SHA1Hash;
 import lecture.com.cashmanager.db.DBHelper;
 import lecture.com.cashmanager.model.Account;
 
 public class SignupActivity extends AppCompatActivity {
 
     private static final String TAG = "SignupActivity";
-    private String username;
+    String username;
 
     EditText _nameText;
     EditText _emailText;
@@ -27,6 +29,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText _reEnterPasswordText;
     Button   _signupButton;
     TextView _loginLink;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +65,7 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-    private void signup() {
+    private void signup(){
         Log.d(TAG, "Signup");
 
         if (!validate()) {
@@ -72,19 +75,16 @@ public class SignupActivity extends AppCompatActivity {
 
         _signupButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Creating Account...");
-        progressDialog.show();
+        final SpotsDialog dialog = new SpotsDialog(this, R.style.AppTheme_Signup_Dialog);
+        dialog.show();
 
         String name = _nameText.getText().toString();
         String email = _emailText.getText().toString();
-        username = _usernameText.getText().toString();
+        String username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
 
         //Implement signup logic.
-        Account acc = new Account(username, password, name, email);
+        Account acc = new Account(username, SHA1Hash.SHA1(password), name, email);
         DBHelper accountDAO = new DBHelper(this);
         accountDAO.addAccount(acc);
 
@@ -95,7 +95,7 @@ public class SignupActivity extends AppCompatActivity {
                         // depending on success
                         onSignupSuccess();
                         // onSignupFailed();
-                        progressDialog.dismiss();
+                        dialog.dismiss();
                     }
                 }, 3000);
     }
@@ -105,7 +105,7 @@ public class SignupActivity extends AppCompatActivity {
 
         String name = _nameText.getText().toString();
         String email = _emailText.getText().toString();
-        String username = _usernameText.getText().toString();
+        username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
 
@@ -159,7 +159,6 @@ public class SignupActivity extends AppCompatActivity {
 
     private void onSignupFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
         _signupButton.setEnabled(true);
     }
 }

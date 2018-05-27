@@ -172,6 +172,10 @@
     <string name="txt_about_share_title">Chia sẻ qua</string>
     <string name="txt_bbm_qr_pin" translatable="false">PIN: 2BFE6A3A</string>
     <string name="txt_title_header_bbm" translatable="false">Black Berry Messener</string>
+    <string name="signup_creating">Đang tạo tài khoản</string>
+    <string name="txt_menu_view">Xem</string>
+    <string name="txt_menu_edit">Sửa</string>
+    <string name="txt_menu_delete">Xóa</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

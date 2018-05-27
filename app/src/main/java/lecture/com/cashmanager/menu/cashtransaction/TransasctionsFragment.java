@@ -4,8 +4,6 @@ package lecture.com.cashmanager.menu.cashtransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,14 +17,12 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import lecture.com.cashmanager.adapters.TransactionShowAdapter;
-import lecture.com.cashmanager.menu.cashtransaction.AddTransactionActivity;
 import lecture.com.cashmanager.R;
 import lecture.com.cashmanager.model.CashTransaction;
 
@@ -56,7 +52,7 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_transasctions, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_transactions, container, false);
 
         fab_income = rootView.findViewById(R.id.fab_income);
         fab_expense = rootView.findViewById(R.id.fab_expense);

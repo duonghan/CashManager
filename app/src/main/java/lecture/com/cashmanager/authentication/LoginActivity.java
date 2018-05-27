@@ -94,12 +94,13 @@ public class LoginActivity extends AppCompatActivity {
 
         //authentication logic.
         final DBHelper accountDAO = new DBHelper(this);
-        account = accountDAO.getAccount(username, password);
 
-        if(account == null){
+        if(accountDAO.checkAccount(username, password)){
             onLoginFailed();
             return;
         }
+
+        account = accountDAO.getAccount(username);
 
         new android.os.Handler().postDelayed(
             new Runnable() {
@@ -134,9 +135,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
         Intent intent = new Intent(this, MainActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("user", account);
-        intent.putExtras(bundle);
+
         // Save data to share preference
         SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
         editor.putString("name", account.getName());

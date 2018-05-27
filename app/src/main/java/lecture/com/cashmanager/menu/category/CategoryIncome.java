@@ -97,10 +97,9 @@ public class CategoryIncome extends Fragment {
         menu.setHeaderTitle(getString(R.string.title_context_menu));
 
         // groupId, itemId, order, title
-        menu.add(0, MENU_ITEM_VIEW , 0, "View Note");
-        menu.add(0, MENU_ITEM_CREATE , 1, "Create Note");
-        menu.add(0, MENU_ITEM_EDIT , 2, "Edit Note");
-        menu.add(0, MENU_ITEM_DELETE, 4, "Delete Note");
+        menu.add(0, MENU_ITEM_VIEW , 0, getString(R.string.txt_menu_view));
+        menu.add(0, MENU_ITEM_EDIT , 1, getString(R.string.txt_menu_edit));
+        menu.add(0, MENU_ITEM_DELETE, 2, getString(R.string.txt_menu_delete));
     }
 
     @Override
@@ -121,9 +120,9 @@ public class CategoryIncome extends Fragment {
         }
         else if(item.getItemId() == MENU_ITEM_EDIT ){
             Intent intent = new Intent(getActivity(), AddCategoryActivity.class);
-            intent.putExtra("note", selectedCategory);
+            intent.putExtra("category", selectedCategory);
 
-            // Start AddEditNoteActivity, có phản hồi.
+            // Start AddCategoryActivity, có phản hồi.
             this.startActivityForResult(intent,MY_REQUEST_CODE);
         }
         else if(item.getItemId() == MENU_ITEM_DELETE){

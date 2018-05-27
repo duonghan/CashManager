@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lecture.com.cashmanager.R;
+import lecture.com.cashmanager.SHA1Hash;
 import lecture.com.cashmanager.entity.CashInfo;
 import lecture.com.cashmanager.model.Account;
 import lecture.com.cashmanager.model.CashTransaction;
@@ -124,13 +125,13 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param password
      * @return
      */
-    public Account getAccount(String username, String password){
+    public Account getAccount(String username){
         SQLiteDatabase db = this.getReadableDatabase();
         Account account = new Account();
 
         String query = "SELECT * FROM " +
                 TABLE_ACCOUNT + " WHERE " + USERNAME + " = \'" + username +
-                "\' AND " + PASSWORD + " = \'" + password + "\'";
+                "\'";
 
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
@@ -143,6 +144,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.close();
         return account;
+    }
+
+    public boolean checkAccount(String username, String password){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " +
+                TABLE_ACCOUNT + " WHERE " + USERNAME + " = \'" + username +
+                "\' AND " + PASSWORD + " = \'" + SHA1Hash.SHA1(password) + "\'";
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor.moveToFirst();
     }
 
     /**

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import lecture.com.cashmanager.R;
-import lecture.com.cashmanager.menu.category.CategoryDebt;
 import lecture.com.cashmanager.menu.category.CategoryExpense;
 import lecture.com.cashmanager.menu.category.CategoryIncome;
 

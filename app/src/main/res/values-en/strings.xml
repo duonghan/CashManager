@@ -79,4 +79,8 @@
     <string name="txt_version">Version 1.0.304</string>
     <string name="txt_author">by Hàn Dương</string>
     <string name="txt_about_share_title">Share via</string>
+    <string name="signup_creating">Creating Account...</string>
+    <string name="txt_menu_view">View</string>
+    <string name="txt_menu_edit">Edit</string>
+    <string name="txt_menu_delete">Delete</string>
 </resources>
