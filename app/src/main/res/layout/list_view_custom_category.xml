@@ -10,7 +10,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/text_view_custom_1"
+        android:id="@+id/text_view_category_id"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_view_category_name"
         android:textSize="@dimen/text"
         android:textColor="@android:color/black" />
 

@@ -13,17 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lecture.com.cashmanager.R;
+import lecture.com.cashmanager.entity.CashInfo;
 import lecture.com.cashmanager.model.CashTransaction;
 
 public class TransactionShowAdapter extends RecyclerView.Adapter<TransactionShowAdapter.ViewHolder> {
 
     private Context context;
-    private List<CashTransaction> transactionInfoList;
+    private List<CashInfo> transactionInfoList;
 
     public TransactionShowAdapter() {
     }
 
-    public TransactionShowAdapter(Context context, List<CashTransaction> transactionInfoList) {
+    public TransactionShowAdapter(Context context, List<CashInfo> transactionInfoList) {
         this.context = context;
         this.transactionInfoList = transactionInfoList;
     }
@@ -37,10 +38,10 @@ public class TransactionShowAdapter extends RecyclerView.Adapter<TransactionShow
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CashTransaction transaction = transactionInfoList.get(position);
+        CashInfo transaction = transactionInfoList.get(position);
         ArrayList<CashTransaction> arrCashTransaction = new ArrayList<>();
 
-        holder.txtDate.setText(transaction.getCreated().toString());
+        holder.txtDate.setText(transaction.getDate().toString());
         holder.txtDateValue.setText(String.valueOf(transaction.getValue()));
 
         //TODO: Add month transaction

@@ -176,6 +176,17 @@
     <string name="txt_menu_view">Xem</string>
     <string name="txt_menu_edit">Sửa</string>
     <string name="txt_menu_delete">Xóa</string>
+    <string name="txt_hint_currency">0    đ</string>
+    <string name="btn_save">Lưu</string>
+    <string name="btn_cancel">Hủy</string>
+    <string name="txt_error_signup_noti">Đăng kí thất bại</string>
+    <string name="txt_error_login_noti">Đăng nhập thất bại</string>
+    <string name="txt_error_signup_name">Tối thiểu 10 kí tự</string>
+    <string name="txt_error_signup_email">Địa chỉ email không hợp lệ</string>
+    <string name="txt_error_signup_username">Tối thiểu 6 kí tự</string>
+    <string name="txt_error_signup_password">Chứa 4 đến 10 kí tự</string>
+    <string name="txt_error_signup_repass">Mật khẩu không khớp</string>
+    <string name="select_category">Chọn khoản mục</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

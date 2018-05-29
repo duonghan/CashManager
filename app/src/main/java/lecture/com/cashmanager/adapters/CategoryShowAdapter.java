@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lecture.com.cashmanager.R;
@@ -35,7 +34,8 @@ public class CategoryShowAdapter extends ArrayAdapter<Category> {
         if(convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.list_view_custom_category, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.txtName = (TextView) convertView.findViewById(R.id.text_view_custom_1);
+            viewHolder.txtName = (TextView) convertView.findViewById(R.id.text_view_category_name);
+            viewHolder.txtID = (TextView) convertView.findViewById(R.id.text_view_category_id);
             convertView.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -43,12 +43,13 @@ public class CategoryShowAdapter extends ArrayAdapter<Category> {
 
         Category category = arrCategory.get(position);
         viewHolder.txtName.setText(category.getName());
-        
+        viewHolder.txtID.setText(String.valueOf(category.getId()));
 
         return convertView;
     }
 
     public class ViewHolder {
         TextView txtName;
+        TextView txtID;
     }
 }

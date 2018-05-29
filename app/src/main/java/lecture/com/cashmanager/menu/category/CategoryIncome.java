@@ -112,12 +112,12 @@ public class CategoryIncome extends Fragment {
         if(item.getItemId() == MENU_ITEM_VIEW){
             Toast.makeText(getContext(),selectedCategory.getName(),Toast.LENGTH_LONG).show();
         }
-        else if(item.getItemId() == MENU_ITEM_CREATE){
-            Intent intent = new Intent(getActivity(), AddCategoryActivity.class);
-
-            // Start AddEditNoteActivity, có phản hồi.
-            this.startActivityForResult(intent, MY_REQUEST_CODE);
-        }
+//        else if(item.getItemId() == MENU_ITEM_CREATE){
+//            Intent intent = new Intent(getActivity(), AddCategoryActivity.class);
+//
+//            // Start AddEditNoteActivity, có phản hồi.
+//            this.startActivityForResult(intent, MY_REQUEST_CODE);
+//        }
         else if(item.getItemId() == MENU_ITEM_EDIT ){
             Intent intent = new Intent(getActivity(), AddCategoryActivity.class);
             intent.putExtra("category", selectedCategory);

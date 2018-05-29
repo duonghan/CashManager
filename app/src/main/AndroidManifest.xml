@@ -14,11 +14,9 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".authentication.SignupActivity" />
-
         <activity
             android:name=".authentication.LoginActivity"
-            android:windowSoftInputMode="adjustResize"/>
-
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".authentication.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,19 +60,24 @@
         </activity>
         <activity
             android:name=".menu.ReportActivity"
-            android:theme="@style/AppTheme"
             android:label="@string/report"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".menu.DebtActivity"
-            android:theme="@style/AppTheme"
             android:label="@string/debt"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".menu.AboutActivity"
-            android:theme="@style/AppTheme"
             android:label="@string/about"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".menu.cashtransaction.CategorySelectorActivity"
+            android:label="@string/select_category"
+            android:parentActivityName=".menu.cashtransaction.AddTransactionActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

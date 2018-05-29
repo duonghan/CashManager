@@ -48,6 +48,6 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return("Name: " + this.name + ",Type: " + this.type);
+        return(this.name);
     }
 }

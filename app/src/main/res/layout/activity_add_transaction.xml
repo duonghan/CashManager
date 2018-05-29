@@ -6,6 +6,7 @@
     tools:context=".menu.cashtransaction.AddTransactionActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/grey_bg">
 
     <android.support.v7.widget.CardView
@@ -21,22 +22,24 @@
             android:padding="@dimen/activity_vertical_margin" >
 
             <EditText
+                android:id="@+id/txt_add_transaction_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textColor="@color/red"
                 android:inputType="number"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:textColorHint="@color/red"
                 android:layout_marginBottom="20dp"
-                android:hint="0 d" />
+                android:hint="@string/txt_hint_currency"/>
 
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TableRow
+                    android:id="@+id/txt_add_transaction_category_wrap"
                     android:weightSum="6">
 
                     <ImageView
@@ -46,11 +49,16 @@
                         android:src="@drawable/ic_category_select"/>
 
                     <EditText
+                        android:id="@+id/txt_add_transaction_category"
                         android:layout_weight="5"
+                        android:editable="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="20dp"
-                        android:hint="@string/add_ts_select_cate" />
+                        android:paddingStart="20dp"
+                        android:hint="@string/add_ts_select_cate"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
+                        android:focusable="false" />
 
                 </TableRow>
 
@@ -61,19 +69,24 @@
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_note_black"/>
 
                     <EditText
+                        android:id="@+id/txt_add_transaction_note"
                         android:layout_weight="5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="20dp"
+                        android:paddingStart="20dp"
                         android:hint="@string/add_ts_note"
-                        android:inputType="textMultiLine"/>
+                        android:gravity="start"
+                        android:inputType="textMultiLine"
+                        android:lines="3"/>
 
                 </TableRow>
 
                 <TableRow
+                    android:id="@+id/txt_add_transaction_date_wrap"
                     android:weightSum="6">
 
                     <ImageView
@@ -83,15 +96,46 @@
                         android:src="@drawable/ic_today_black_24dp"/>
 
                     <EditText
+                        android:id="@+id/txt_add_transaction_date"
                         android:layout_weight="5"
+                        android:editable="false"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="20dp"
+                        android:paddingStart="20dp"
                         android:hint="@string/add_ts_today"
-                        android:inputType="datetime"/>
+                        android:inputType="date"
+                        android:imeOptions="actionDone"
+                        android:focusable="false" />
                 </TableRow>
             </TableLayout>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_add_transaction_save"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/red"
+            android:textColor="@color/white"
+            android:text="@string/btn_save"/>
+
+        <Button
+            android:id="@+id/btn_add_transaction_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginStart="20dp"
+            android:background="@color/red"
+            android:textColor="@color/white"
+            android:text="@string/btn_cancel"/>
+    </LinearLayout>
+
 </LinearLayout>
