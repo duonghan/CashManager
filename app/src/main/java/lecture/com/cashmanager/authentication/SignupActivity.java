@@ -97,7 +97,7 @@ public class SignupActivity extends AppCompatActivity {
                         // onSignupFailed();
                         dialog.dismiss();
                     }
-                }, 3000);
+                }, 2000);
     }
 
     private boolean validate() {
@@ -109,36 +109,36 @@ public class SignupActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
 
-        if (name.isEmpty() || name.length() < 6) {
-            _nameText.setError("at least 10 characters");
+        if (name.isEmpty() || name.length() < 10) {
+            _nameText.setError(getString(R.string.txt_error_signup_name));
             valid = false;
         } else {
             _nameText.setError(null);
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError("enter a valid email address");
+            _emailText.setError(getString(R.string.txt_error_signup_email));
             valid = false;
         } else {
             _emailText.setError(null);
         }
 
         if (username.isEmpty() || username.length() < 6) {
-            _usernameText.setError("username must be at least 6 characters");
+            _usernameText.setError(getString(R.string.txt_error_signup_username));
             valid = false;
         } else {
             _usernameText.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            _passwordText.setError("between 4 and 10 alphanumeric characters");
+            _passwordText.setError(getString(R.string.txt_error_signup_password));
             valid = false;
         } else {
             _passwordText.setError(null);
         }
 
         if (reEnterPassword.isEmpty() || reEnterPassword.length() < 4 || reEnterPassword.length() > 10 || !(reEnterPassword.equals(password))) {
-            _reEnterPasswordText.setError("Password Do not match");
+            _reEnterPasswordText.setError(getString(R.string.txt_error_signup_repass));
             valid = false;
         } else {
             _reEnterPasswordText.setError(null);
@@ -154,11 +154,10 @@ public class SignupActivity extends AppCompatActivity {
         setResult(RESULT_OK, intent);
         startActivity(intent);
         finish();
-        overridePendingTransition(android.R.anim.accelerate_decelerate_interpolator, android.R.anim.accelerate_interpolator);
     }
 
     private void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), getString(R.string.txt_error_signup_noti), Toast.LENGTH_LONG).show();
         _signupButton.setEnabled(true);
     }
 }

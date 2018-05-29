@@ -95,8 +95,9 @@ public class LoginActivity extends AppCompatActivity {
         //authentication logic.
         final DBHelper accountDAO = new DBHelper(this);
 
-        if(accountDAO.checkAccount(username, password)){
+        if(!accountDAO.checkAccount(username, password)){
             onLoginFailed();
+            dialog.dismiss();
             return;
         }
 
@@ -107,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void run() {
                     // On complete call either onLoginSuccess or onLoginFailed
                     onLoginSuccess();
-                    // onLoginFailed();
+//                    onLoginFailed();
                     dialog.dismiss();
                 }
             }, 2000);
