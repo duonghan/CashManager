@@ -97,4 +97,9 @@
     <string name="txt_input_current_pass">Enter current password</string>
     <string name="txt_input_new_password">Enter new password</string>
     <string name="txt_input_renew_pass">Re-Enter new password</string>
+    <string name="txt_error_change_pass">Change password failed</string>
+    <string name="txt_change_pass_success">Change password successfully</string>
+    <string name="txt_error_add_category">Please enter category name</string>
+    <string name="txt_add_category_success">Add category successfully</string>
+    <string name="txt_update_category_success">Update category successfully</string>
 </resources>

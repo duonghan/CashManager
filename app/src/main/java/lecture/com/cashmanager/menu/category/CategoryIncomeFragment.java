@@ -33,7 +33,7 @@ import lecture.com.cashmanager.model.Category;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CategoryIncome extends Fragment {
+public class CategoryIncomeFragment extends Fragment {
 
     public final int ADD_INCOME = 111;
     public final int INCOME = 1;
@@ -50,7 +50,7 @@ public class CategoryIncome extends Fragment {
     ListView listView;
     FloatingActionButton fab;
 
-    public CategoryIncome() {
+    public CategoryIncomeFragment() {
         // Required empty public constructor
     }
 
@@ -72,23 +72,18 @@ public class CategoryIncome extends Fragment {
         String lang = preferences.getString("lang_list","vi");
         listIncome = categoryDAO.getAllCategoryByType(INCOME, lang);
 
-        this.arrayAdapter = new CategoryShowAdapter(getActivity(), R.layout.list_view_custom_category, this.listIncome);
+        arrayAdapter = new CategoryShowAdapter(getActivity(), R.layout.list_view_custom_category, listIncome);
 
-        this.listView.setAdapter(arrayAdapter);
-        registerForContextMenu(this.listView);
+        listView.setAdapter(arrayAdapter);
+        registerForContextMenu(listView);
 
-
-//        System.out.println(listIncome);
-//
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, listIncome);
-//        listView.setAdapter(adapter);
-//
         fab.attachToListView(listView);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent addCategory = new Intent(getActivity(), AddCategoryActivity.class);
+                addCategory.putExtra("type", INCOME);
                 startActivityForResult(addCategory, ADD_INCOME);
             }
         });
@@ -112,26 +107,18 @@ public class CategoryIncome extends Fragment {
         AdapterView.AdapterContextMenuInfo
                 info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
-        final Category selectedCategory = (Category) this.listView.getItemAtPosition(info.position);
+        final Category selectedCategory = (Category) listView.getItemAtPosition(info.position);
 
         if(item.getItemId() == MENU_ITEM_VIEW){
             Toast.makeText(getContext(),selectedCategory.getName(),Toast.LENGTH_LONG).show();
         }
-//        else if(item.getItemId() == MENU_ITEM_CREATE){
-//            Intent intent = new Intent(getActivity(), AddCategoryActivity.class);
-//
-//            // Start AddEditNoteActivity, có phản hồi.
-//            this.startActivityForResult(intent, MY_REQUEST_CODE);
-//        }
         else if(item.getItemId() == MENU_ITEM_EDIT ){
             Intent intent = new Intent(getActivity(), AddCategoryActivity.class);
             intent.putExtra("category", selectedCategory);
-
-            // Start AddCategoryActivity, có phản hồi.
-            this.startActivityForResult(intent,MY_REQUEST_CODE);
+            startActivityForResult(intent,ADD_INCOME);
         }
         else if(item.getItemId() == MENU_ITEM_DELETE){
-            // Hỏi trước khi xóa.
+            // Ask before delete category
             new AlertDialog.Builder(getContext())
                     .setMessage(selectedCategory.getName()+". Are you sure you want to delete?")
                     .setCancelable(false)
@@ -152,27 +139,30 @@ public class CategoryIncome extends Fragment {
     private void deleteCategory(Category selectedCategory) {
         DBHelper db = new DBHelper(getContext());
         db.deleteCategory(selectedCategory.getId(), true);
-        this.listIncome.remove(selectedCategory);
+        listIncome.remove(selectedCategory);
+
         // Refresh ListView.
-        this.arrayAdapter.notifyDataSetChanged();
+        arrayAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE ) {
+        if (resultCode == Activity.RESULT_OK && requestCode == ADD_INCOME ) {
             boolean needRefresh = data.getBooleanExtra("needRefresh",true);
+
             // Refresh ListView
             if(needRefresh) {
-                this.listIncome.clear();
+                listIncome.clear();
                 DBHelper db = new DBHelper(getContext());
 
-                //Load locale
+                // Load locale
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 String lang = preferences.getString("lang_list","vi");
                 List<Category> list=  db.getAllCategoryByType(INCOME, lang);
-                this.listIncome.addAll(list);
-                // Thông báo dữ liệu thay đổi (Để refresh ListView).
-                this.arrayAdapter.notifyDataSetChanged();
+                listIncome.addAll(list);
+
+                // Notify about data change ( to refresh ListView).
+                arrayAdapter.notifyDataSetChanged();
             }
         }
     }

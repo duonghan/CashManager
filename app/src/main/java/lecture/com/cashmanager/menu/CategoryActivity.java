@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import lecture.com.cashmanager.R;
-import lecture.com.cashmanager.menu.category.CategoryExpense;
-import lecture.com.cashmanager.menu.category.CategoryIncome;
+import lecture.com.cashmanager.menu.category.CategoryExpenseFragment;
+import lecture.com.cashmanager.menu.category.CategoryIncomeFragment;
 
 public class CategoryActivity extends AppCompatActivity {
 
@@ -45,8 +45,8 @@ public class CategoryActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new CategoryIncome(), getString(R.string.txt_Income));
-        adapter.addFragment(new CategoryExpense(), getString(R.string.txt_Expense));
+        adapter.addFragment(new CategoryIncomeFragment(), getString(R.string.txt_Income));
+        adapter.addFragment(new CategoryExpenseFragment(), getString(R.string.txt_Expense));
 
         viewPager.setAdapter(adapter);
     }

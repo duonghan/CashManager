@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity
                 // Validate
                 if (newPassword.isEmpty() || newPassword.length() < 4 || newPassword.length() > 10) {
                     edtNewPass.setError(getString(R.string.txt_error_signup_password));
+                    Toast.makeText(getApplicationContext(), R.string.txt_error_signup_password, Toast.LENGTH_LONG).show();
                     isValid[0] = false;
                 } else {
                     edtNewPass.setError(null);
@@ -160,6 +161,7 @@ public class MainActivity extends AppCompatActivity
 
                 if (renewPassword.isEmpty() || renewPassword.length() < 4 || renewPassword.length() > 10 || !(renewPassword.equals(newPassword))) {
                     edtReNewPass.setError(getString(R.string.txt_error_signup_repass));
+                    Toast.makeText(getApplicationContext(), R.string.txt_error_signup_repass, Toast.LENGTH_LONG).show();
                     isValid[0] = false;
                 } else {
                     edtReNewPass.setError(null);
@@ -168,12 +170,14 @@ public class MainActivity extends AppCompatActivity
                 DBHelper db = new DBHelper(getApplicationContext());
                 if(!db.checkAccount(username, currentPassword)){
                     edtCurrentPass.setError(getString(R.string.txt_error_login_noti));
+                    Toast.makeText(getApplicationContext(), R.string.txt_error_change_pass, Toast.LENGTH_LONG).show();
                     isValid[0] = false;
                 }else{
 
                     //Update password
                     Account account = new Account(userid, username,  newPassword, name, email);
                     db.updateAccount(account);
+                    Toast.makeText(getApplicationContext(), R.string.txt_change_pass_success, Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -234,6 +238,4 @@ public class MainActivity extends AppCompatActivity
         String language = preferences.getString("lang_list","vi");
         setLocale(language);
     }
-
-
 }

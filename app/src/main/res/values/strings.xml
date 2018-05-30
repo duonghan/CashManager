@@ -190,6 +190,11 @@
     <string name="txt_input_current_pass">Mật khẩu hiện tại</string>
     <string name="txt_input_new_password">Mật khẩu mới</string>
     <string name="txt_input_renew_pass">Nhập lại mật khẩu mới</string>
+    <string name="txt_error_change_pass">Đổi mật khẩu thất bại</string>
+    <string name="txt_change_pass_success">Đổi mật khẩu thành công</string>
+    <string name="txt_error_add_category">Vui lòng nhập tên khoản mục</string>
+    <string name="txt_add_category_success">Thêm khoản mục thành công</string>
+    <string name="txt_update_category_success">Cập nhật khoản mục thành công</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

@@ -15,15 +15,19 @@ import lecture.com.cashmanager.model.Category;
 
 public class AddCategoryActivity extends AppCompatActivity {
 
-    Category category;
     private static final int MODE_CREATE = 1;
     private static final int MODE_EDIT = 2;
+    private static final int INCOME = 1;
+    private static final int EXPENSE = -1;
 
     private int mode;
+    private Category category;
+    private int type;
+    private boolean needRefresh;
+
     private EditText txtContent;
     private Button btnSave;
-
-    private boolean needRefresh;
+    private Button btnCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +35,12 @@ public class AddCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_category);
 
         txtContent = findViewById(R.id.add_cate_name);
+        btnSave = (Button)findViewById(R.id.btn_add_category_save) ;
+        btnCancel = (Button)findViewById(R.id.btn_add_category_cancel) ;
+
         Intent intent = this.getIntent();
-        this.category = (Category)intent.getSerializableExtra("category");
+        type = (Integer)intent.getSerializableExtra("type");
+        category = (Category)intent.getSerializableExtra("category");
 
         if(category == null){
             this.mode = MODE_CREATE;
@@ -45,40 +53,56 @@ public class AddCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DBHelper db = new DBHelper(v.getContext());
-
                 String name = txtContent.getText().toString();
-                if(name.equals("")) {
+
+                if(name.equals("")) {   // Validate edit text
                     Toast.makeText(getApplicationContext(),
-                            "Please enter title & content", Toast.LENGTH_LONG).show();
+                            R.string.txt_error_add_category, Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                if(mode==MODE_CREATE ) {
-                    category = new Category(name, 1);
+                if(mode==MODE_CREATE ) {    // Create new category
+
+                    if(type == INCOME){
+                        category = new Category(name, INCOME);
+                    }else{
+                        category = new Category(name, EXPENSE);
+                    }
+
                     db.addCategory(category);
-                } else  {
+
+                    Toast.makeText(getApplicationContext(),
+                            R.string.txt_add_category_success, Toast.LENGTH_LONG).show();
+                } else  {   // Update category
                     category.setName(name);
                     db.updateCategory(category);
+
+                    Toast.makeText(getApplicationContext(),
+                            R.string.txt_update_category_success, Toast.LENGTH_LONG).show();
                 }
 
                 needRefresh = true;
-                // Trở lại MainActivity.
+                // Back to Category activity
+                onBackPressed();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 onBackPressed();
             }
         });
     }
 
-    // Khi Activity này hoàn thành,
-    // có thể cần gửi phản hồi gì đó về cho Activity đã gọi nó.
     @Override
     public void finish() {
 
-        // Chuẩn bị dữ liệu Intent.
         Intent data = new Intent();
-        // Yêu cầu MainActivity refresh lại ListView hoặc không.
+        // Send request to refresh or not list view in Category Activity
         data.putExtra("needRefresh", needRefresh);
 
-        // Activity đã hoàn thành OK, trả về dữ liệu.
+        // Activity is completed and return data
         this.setResult(Activity.RESULT_OK, data);
         super.finish();
     }
