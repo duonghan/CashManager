@@ -166,7 +166,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(NAME, account.getName());
-        values.put(PASSWORD, account.getPassword());
+        values.put(PASSWORD, SHA1Hash.SHA1(account.getPassword()));
         values.put(EMAIL, account.getEmail());
 
         // Updating row

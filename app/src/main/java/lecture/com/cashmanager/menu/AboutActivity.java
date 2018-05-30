@@ -72,7 +72,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
             case R.id.ic_about_bbm:
                 Dialog dialog = new Dialog(this);
                 dialog.setTitle(R.string.txt_title_header_bbm);
-                dialog.setContentView(R.layout.layout_alert_bbm);
+                dialog.setContentView(R.layout.dialog_show_bbm);
                 dialog.show();
                 break;
             case R.id.ic_about_ggplus:

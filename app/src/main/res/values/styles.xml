@@ -9,6 +9,14 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <style name="ChangePassDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:colorBackground">@color/primary_dark</item>
+        <item name="android:windowBackground">@color/primary</item>
+    </style>
+
     <style name="AppTheme.Login.Dialog" parent="AppTheme.Dark.Dialog">
         <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
         <item name="DialogTitleText">@string/authenticating</item>

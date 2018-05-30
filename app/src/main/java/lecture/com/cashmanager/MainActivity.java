@@ -1,6 +1,7 @@
 package lecture.com.cashmanager;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -10,17 +11,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
 import lecture.com.cashmanager.authentication.LoginActivity;
+import lecture.com.cashmanager.db.DBHelper;
 import lecture.com.cashmanager.menu.AboutActivity;
 import lecture.com.cashmanager.menu.CategoryActivity;
 import lecture.com.cashmanager.menu.ReportActivity;
@@ -30,8 +36,12 @@ import lecture.com.cashmanager.model.Account;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    TextView txtName;
-    TextView txtEmail;
+    private TextView txtName;
+    private TextView txtEmail;
+    private int userid;
+    private String username;
+    private String name;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +80,12 @@ public class MainActivity extends AppCompatActivity
         txtName = (TextView)headerView.findViewById(R.id.nav_header_name);
         txtEmail = (TextView)headerView.findViewById(R.id.nav_header_email);
         SharedPreferences preferences = getSharedPreferences("user", Activity.MODE_PRIVATE);
-        txtName.setText(preferences.getString("name", "John Cena"));
-        txtEmail.setText(preferences.getString("email", "example@gmail.com"));
-
+        userid = preferences.getInt("id", 1);
+        username = preferences.getString("username", "");
+        name = preferences.getString("name", "John Cena");
+        email = preferences.getString("email", "example@gmail.com");
+        txtName.setText(name);
+        txtEmail.setText(email);
     }
 
 
@@ -102,7 +115,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_change_password) {
-            return true;
+            return showChangePassDialog();
         }
 
         if (id == R.id.action_logout) {
@@ -115,6 +128,65 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean showChangePassDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_change_password, null);
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.setIcon(R.drawable.ic_change_password);
+
+        final EditText edtCurrentPass = (EditText) dialogView.findViewById(R.id.input_current_password);
+        final EditText edtNewPass = (EditText) dialogView.findViewById(R.id.input_new_password);
+        final EditText edtReNewPass = (EditText) dialogView.findViewById(R.id.input_re_new_password);
+        final boolean[] isValid = {true};
+
+        dialogBuilder.setTitle(R.string.change_pass);
+        dialogBuilder.setPositiveButton(R.string.btn_save, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                String currentPassword = edtCurrentPass.getText().toString();
+                String newPassword = edtNewPass.getText().toString();
+                String renewPassword = edtReNewPass.getText().toString();
+
+                // Validate
+                if (newPassword.isEmpty() || newPassword.length() < 4 || newPassword.length() > 10) {
+                    edtNewPass.setError(getString(R.string.txt_error_signup_password));
+                    isValid[0] = false;
+                } else {
+                    edtNewPass.setError(null);
+                }
+
+                if (renewPassword.isEmpty() || renewPassword.length() < 4 || renewPassword.length() > 10 || !(renewPassword.equals(newPassword))) {
+                    edtReNewPass.setError(getString(R.string.txt_error_signup_repass));
+                    isValid[0] = false;
+                } else {
+                    edtReNewPass.setError(null);
+                }
+
+                DBHelper db = new DBHelper(getApplicationContext());
+                if(!db.checkAccount(username, currentPassword)){
+                    edtCurrentPass.setError(getString(R.string.txt_error_login_noti));
+                    isValid[0] = false;
+                }else{
+
+                    //Update password
+                    Account account = new Account(userid, username,  newPassword, name, email);
+                    db.updateAccount(account);
+                }
+
+            }
+        });
+        dialogBuilder.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+               onBackPressed();
+            }
+        });
+
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+        return isValid[0];
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -162,5 +234,6 @@ public class MainActivity extends AppCompatActivity
         String language = preferences.getString("lang_list","vi");
         setLocale(language);
     }
+
 
 }

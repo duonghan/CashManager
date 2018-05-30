@@ -109,8 +109,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_qr_bbm" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/qr-bbm-2bfe6a3a8e9.svg" />
+                            <entry key="outputName" value="ic_change_password" />
+                            <entry key="sourceFile" value="$USER_HOME$/Downloads/password.svg" />
                           </map>
                         </option>
                       </PersistentState>

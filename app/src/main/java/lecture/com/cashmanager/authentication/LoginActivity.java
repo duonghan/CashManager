@@ -139,8 +139,10 @@ public class LoginActivity extends AppCompatActivity {
 
         // Save data to share preference
         SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
+        editor.putString("username", account.getUsername());
         editor.putString("name", account.getName());
         editor.putString("email", account.getEmail());
+        editor.putInt("id", account.getId());
         editor.apply();
 
         startActivity(intent);

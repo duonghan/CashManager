@@ -94,4 +94,7 @@
     <string name="txt_error_signup_password">Between 4 and 10 alphanumeric characters</string>
     <string name="txt_error_signup_repass">Password do not match</string>
     <string name="select_category">Select category</string>
+    <string name="txt_input_current_pass">Enter current password</string>
+    <string name="txt_input_new_password">Enter new password</string>
+    <string name="txt_input_renew_pass">Re-Enter new password</string>
 </resources>

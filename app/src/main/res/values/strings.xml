@@ -187,6 +187,9 @@
     <string name="txt_error_signup_password">Chứa 4 đến 10 kí tự</string>
     <string name="txt_error_signup_repass">Mật khẩu không khớp</string>
     <string name="select_category">Chọn khoản mục</string>
+    <string name="txt_input_current_pass">Mật khẩu hiện tại</string>
+    <string name="txt_input_new_password">Mật khẩu mới</string>
+    <string name="txt_input_renew_pass">Nhập lại mật khẩu mới</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>
