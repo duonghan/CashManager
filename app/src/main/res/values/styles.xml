@@ -18,7 +18,7 @@
 
     <style name="AppTheme.Signup.Dialog" parent="AppTheme.Dark.Dialog">
         <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
-        <item name="DialogTitleText">@string/authenticating</item>
+        <item name="DialogTitleText">@string/signup_creating</item>
         <item name="DialogSpotColor">@android:color/holo_orange_dark</item>
         <item name="DialogSpotCount">4</item>
     </style>

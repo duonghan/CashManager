@@ -5,9 +5,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.preference.PreferenceManager;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -65,7 +67,10 @@ public class CategoryIncome extends Fragment {
         categoryDAO = new DBHelper(getContext());
         categoryDAO.createDefaultCategory();
 
-        listIncome = categoryDAO.getAllCategoryByType(INCOME);
+        //Load locale
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String lang = preferences.getString("lang_list","vi");
+        listIncome = categoryDAO.getAllCategoryByType(INCOME, lang);
 
         this.arrayAdapter = new CategoryShowAdapter(getActivity(), R.layout.list_view_custom_category, this.listIncome);
 
@@ -160,7 +165,11 @@ public class CategoryIncome extends Fragment {
             if(needRefresh) {
                 this.listIncome.clear();
                 DBHelper db = new DBHelper(getContext());
-                List<Category> list=  db.getAllCategoryByType(INCOME);
+
+                //Load locale
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                String lang = preferences.getString("lang_list","vi");
+                List<Category> list=  db.getAllCategoryByType(INCOME, lang);
                 this.listIncome.addAll(list);
                 // Thông báo dữ liệu thay đổi (Để refresh ListView).
                 this.arrayAdapter.notifyDataSetChanged();

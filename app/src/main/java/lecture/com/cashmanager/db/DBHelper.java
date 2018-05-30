@@ -46,6 +46,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // Category Table - column names
     private static final String TYPE = "type";
+    private static final String NAME_EN = "name_en";
 
     // Transaction Table - column names
     private static final String USERID = "userid" ;
@@ -65,7 +66,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // Category table create statement
     private static final String CREATE_TABLE_CATEGORY = "CREATE TABLE "+
                         TABLE_CATEGORY + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                        NAME + " TEXT, "+ TYPE + " INTEGER)"; // 1 as Income and -1 as Expense
+                        NAME + " TEXT, "+ NAME_EN + " TEXT, "+TYPE + " INTEGER)"; // 1 as Income and -1 as Expense
 
     // Transaction table create statement
     private static final String CREATE_TABLE_TRANSACTION = "CREATE TABLE "+
@@ -122,7 +123,6 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
      * Get an account
      * @param username
-     * @param password
      * @return
      */
     public Account getAccount(String username){
@@ -199,6 +199,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(NAME, category.getName());
+        values.put(NAME_EN, category.getName());
         values.put(TYPE, category.getType());
 
         db.insert(TABLE_CATEGORY, null, values);
@@ -227,30 +228,44 @@ public class DBHelper extends SQLiteOpenHelper {
         int count = this.getCategoryCount();
         if(count == 0){
 
-//            String [] incomeEntries = {"Award","Gifts","InterestMoney","Salary","Selling",
-//                    "Others","Debt", "Debt Collection"};
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            String [] incomeEntriesEn = {"Award","Gifts","InterestMoney","Salary","Selling",
+                    "Others","Debt", "Debt Collection"};
 
-//            String [] expenseEntries = {"Bills_and_Utilities","Entertainment","Food_and_Beverage",
-//                    "Business","Gifts_and_Donations","Health_and_Fitness","Holidays","Family",
-//                    "Pets","Shopping","Educations","Friends_and_Lovers","Insurances","Investment",
-//                    "Transportation","Travel","Withdrawal","Fees_and_Charges","Repayment",
-//                    "Debt_Collection", "Loan", "Repayment"};
-            String [] incomeEntries = {"Thưởng","Được tặng","Tiền lãi","Lương","Bán đồ","Đi vay", "Thu nợ", "Khác"};
+            String [] expenseEntriesEn = {"Bills and Utilities","Entertainment","Food and Beverage",
+                    "Business","Gifts and Donations","Health and Fitness","Holidays","Family",
+                    "Pets","Shopping","Educations","Friends and Lovers","Insurances","Investment",
+                    "Transportation","Travel","Withdrawal","Fees and Charges","Repayment",
+                    "Debt Collection", "Loan", "Repayment"};
 
-            String [] expenseEntries = {"Hóa đơn và Tiện ích","Giải trí","Ăn uống",
+            String [] incomeEntriesVi = {"Thưởng","Được tặng","Tiền lãi","Lương","Bán đồ","Đi vay", "Thu nợ", "Khác"};
+
+            String [] expenseEntriesVi = {"Hóa đơn và Tiện ích","Giải trí","Ăn uống",
                     "Kinh doanh","Quà tăng và Từ thiện","Sức khỏe","Nghỉ lễ","Gia đình",
                     "Vật nuôi","Mua sắm","Giáo dục","Người yêu và Bạn bè","Bảo hiểm","Đầu tư",
                     "Di chuyển","Du lịch","Rút tiền","Chi phí","Trả nợ", "Cho vay"};
 
+            int incomeLength = incomeEntriesVi.length;
+            int expenseLength = expenseEntriesVi.length;
+
             // Add income entries to database
-            for (String entry: incomeEntries) {
-                this.addCategory(new Category(entry, 1));
+            for(int i = 0; i< incomeLength; i++){
+                values.put(NAME, incomeEntriesVi[i]);
+                values.put(NAME_EN, incomeEntriesEn[i]);
+                values.put(TYPE, 1);
+                db.insert(TABLE_CATEGORY, null, values);
             }
 
             // Add expense entries to database
-            for (String entry: expenseEntries) {
-                this.addCategory(new Category(entry, -1));
+            for(int i = 0; i< expenseLength; i++){
+                values.put(NAME, expenseEntriesVi[i]);
+                values.put(NAME_EN, expenseEntriesEn[i]);
+                values.put(TYPE, -1);
+                db.insert(TABLE_CATEGORY, null, values);
             }
+
+            db.close();
         }
     }
 
@@ -258,15 +273,22 @@ public class DBHelper extends SQLiteOpenHelper {
      * Get category value by ID
      * @param id
      */
-    public Category getCategory(int id){
+    public Category getCategory(int id, String lang){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_CATEGORY + " WHERE " + ID + " = " + id;
         Cursor cursor = db.rawQuery(query, null);
 
         if(cursor.moveToFirst()){
-            return new Category(cursor.getInt(0),
-                    cursor.getString(1),
-                    cursor.getInt(2));
+            Category category = new Category();
+            category.setId(cursor.getInt(0));
+
+            if(!lang.equals("en"))
+                category.setName(cursor.getString(1));  // vietnamese
+            else
+                category.setName(cursor.getString(2));  //english
+
+            category.setType(cursor.getInt(3));
+            return category;
         }
         db.close();
 
@@ -278,7 +300,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param type
      * @return
      */
-    public List<Category> getAllCategoryByType(int type){
+    public List<Category> getAllCategoryByType(int type, String lang){
         List<Category> lstCategory = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -289,8 +311,13 @@ public class DBHelper extends SQLiteOpenHelper {
             do{
                 Category category = new Category();
                 category.setId(cursor.getInt(0));
-                category.setName(cursor.getString(1));
-                category.setType(cursor.getInt(2));
+
+                if(!lang.equals("en"))
+                    category.setName(cursor.getString(1));  // vietnamese
+                else
+                    category.setName(cursor.getString(2));  //english
+
+                category.setType(cursor.getInt(3));
 
                 lstCategory.add(category);
             }while (cursor.moveToNext());
@@ -305,6 +332,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(NAME, category.getName());
+        values.put(NAME_EN, category.getName());
         values.put(TYPE, category.getType());
 
         int resullt = db.update(TABLE_CATEGORY, values, ID + " =? ",

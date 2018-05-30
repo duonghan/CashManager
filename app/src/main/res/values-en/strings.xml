@@ -88,7 +88,7 @@
     <string name="btn_cancel">Cancel</string>
     <string name="txt_error_signup_noti">Signup failed</string>
     <string name="txt_error_login_noti">Login failed</string>
-    <string name="txt_error_signup_name">At least 10 characters</string>
+    <string name="txt_error_signup_name">At least 6 characters</string>
     <string name="txt_error_signup_email">Enter a valid email address</string>
     <string name="txt_error_signup_username">At least 10 characters</string>
     <string name="txt_error_signup_password">Between 4 and 10 alphanumeric characters</string>

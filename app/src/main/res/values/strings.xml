@@ -181,7 +181,7 @@
     <string name="btn_cancel">Hủy</string>
     <string name="txt_error_signup_noti">Đăng kí thất bại</string>
     <string name="txt_error_login_noti">Đăng nhập thất bại</string>
-    <string name="txt_error_signup_name">Tối thiểu 10 kí tự</string>
+    <string name="txt_error_signup_name">Tối thiểu 6 kí tự</string>
     <string name="txt_error_signup_email">Địa chỉ email không hợp lệ</string>
     <string name="txt_error_signup_username">Tối thiểu 6 kí tự</string>
     <string name="txt_error_signup_password">Chứa 4 đến 10 kí tự</string>

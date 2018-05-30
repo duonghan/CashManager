@@ -1,8 +1,10 @@
 package lecture.com.cashmanager.menu.cashtransaction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -38,7 +40,11 @@ public class CategorySelectorActivity extends AppCompatActivity {
         Intent intent = this.getIntent();
         type = (Integer) intent.getSerializableExtra("categoryType");
 
-        listCategory = categoryDAO.getAllCategoryByType(type);
+        //Load locale
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String lang = preferences.getString("lang_list","vi");
+
+        listCategory = categoryDAO.getAllCategoryByType(type,lang);
         this.arrayAdapter = new CategoryShowAdapter(this, R.layout.list_view_custom_category, this.listCategory);
 
         this.listView.setAdapter(arrayAdapter);

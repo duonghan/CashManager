@@ -2,8 +2,10 @@ package lecture.com.cashmanager.menu.category;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ import lecture.com.cashmanager.model.Category;
 public class CategoryExpense extends Fragment {
 
     public final int ADD_EXPENSE = 222;
+    public final int EXPENSE = -1;
     DBHelper categoryDAO;
     List<Category> listExpense = new ArrayList<>();
     CategoryShowAdapter arrayAdapter;
@@ -47,7 +50,11 @@ public class CategoryExpense extends Fragment {
 
         categoryDAO = new DBHelper(getContext());
         categoryDAO.createDefaultCategory();
-        listExpense = categoryDAO.getAllCategoryByType(-1);
+
+        //Load locale
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String lang = preferences.getString("lang_list","vi");
+        listExpense = categoryDAO.getAllCategoryByType(EXPENSE, lang);
         this.arrayAdapter = new CategoryShowAdapter(getActivity(), R.layout.list_view_custom_category, this.listExpense);
 
         this.listView.setAdapter(arrayAdapter);

@@ -109,7 +109,7 @@ public class SignupActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
         String reEnterPassword = _reEnterPasswordText.getText().toString();
 
-        if (name.isEmpty() || name.length() < 10) {
+        if (name.isEmpty() || name.length() < 6) {
             _nameText.setError(getString(R.string.txt_error_signup_name));
             valid = false;
         } else {
