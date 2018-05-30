@@ -70,7 +70,7 @@
     <string name="add_ts_note">Note</string>
     <string name="add_ts_today">Today</string>
     <string name="title_add_category">Add category</string>
-    <string name="hint_cate_name">Category Name</string>
+    <string name="cate_name">Category Name</string>
     <string name="menu_save">Save</string>
     <string name="title_context_menu">Select The Action</string>
     <string name="txt_enter_category">Enter category name</string>
@@ -102,4 +102,9 @@
     <string name="txt_error_add_category">Please enter category name</string>
     <string name="txt_add_category_success">Add category successfully</string>
     <string name="txt_update_category_success">Update category successfully</string>
+    <string name="txt_ask_delete">Are you sure you want to delete?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="type">Type</string>
+    <string name="show_category">Category Details</string>
 </resources>

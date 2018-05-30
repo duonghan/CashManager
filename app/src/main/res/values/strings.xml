@@ -160,7 +160,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_add_category">Thêm khoản mục</string>
-    <string name="hint_cate_name">Tên khoản mục</string>
+    <string name="cate_name">Tên khoản mục</string>
     <string name="menu_save">Lưu</string>
     <string name="title_context_menu">Chọn chức năng</string>
     <string name="txt_enter_category">Nhập tên khoản mục</string>
@@ -195,6 +195,11 @@
     <string name="txt_error_add_category">Vui lòng nhập tên khoản mục</string>
     <string name="txt_add_category_success">Thêm khoản mục thành công</string>
     <string name="txt_update_category_success">Cập nhật khoản mục thành công</string>
+    <string name="txt_ask_delete">Xác nhận xóa?</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+    <string name="type">Kiểu</string>
+    <string name="show_category">Chi tiết khoản mục</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

@@ -28,8 +28,7 @@
             android:name=".menu.cashtransaction.AddTransactionActivity"
             android:label="@string/title_header_transaction_add"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings"
@@ -75,6 +74,11 @@
             android:label="@string/select_category"
             android:parentActivityName=".menu.cashtransaction.AddTransactionActivity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".menu.category.ShowCategoryActivity"
+            android:theme="@style/AppTheme"
+            android:label="@string/show_category"
+            android:parentActivityName=".menu.CategoryActivity"/>
     </application>
 
 </manifest>
