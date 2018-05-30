@@ -29,9 +29,6 @@
             android:label="@string/title_header_transaction_add"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".SettingsActivity"

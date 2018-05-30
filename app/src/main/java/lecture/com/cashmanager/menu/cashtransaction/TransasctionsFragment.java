@@ -3,6 +3,7 @@ package lecture.com.cashmanager.menu.cashtransaction;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

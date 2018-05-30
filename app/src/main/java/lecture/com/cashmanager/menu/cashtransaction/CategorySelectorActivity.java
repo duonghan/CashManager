@@ -46,11 +46,10 @@ public class CategorySelectorActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 category = (Category)parent.getItemAtPosition(position);
-
-                Intent parentActivity = new Intent(getApplicationContext(), AddTransactionActivity.class);
-                parentActivity.putExtra("categoryid", category.getId());
-                parentActivity.putExtra("type", type);
-                startActivity(parentActivity);
+                Intent data = getIntent();
+                data.putExtra("categoryid", category.getId());
+//                data.putExtra("type", type);
+                setResult(RESULT_OK, data);
                 finish();
             }
         });

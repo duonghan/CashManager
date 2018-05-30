@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TableRow;
@@ -37,6 +38,8 @@ public class AddTransactionActivity extends AppCompatActivity{
     EditText tsDate;
     TableRow trCategory;
     TableRow trDate;
+    Button btnSave;
+    Button btnCancel;
 
     private Calendar calendar;
     private int year, month, day;
@@ -52,6 +55,8 @@ public class AddTransactionActivity extends AppCompatActivity{
         tsDate = (EditText)findViewById(R.id.txt_add_transaction_date);
         trCategory = (TableRow)findViewById(R.id.txt_add_transaction_category_wrap);
         trDate = (TableRow)findViewById(R.id.txt_add_transaction_date_wrap);
+        btnSave = (Button)findViewById(R.id.btn_add_transaction_save);
+        btnCancel = (Button)findViewById(R.id.btn_add_transaction_cancel);
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -61,7 +66,7 @@ public class AddTransactionActivity extends AppCompatActivity{
         showDate(year, month, day);
 
         Intent intent = this.getIntent();
-        type = (intent.getSerializableExtra("type") != null &  (Integer) intent.getSerializableExtra("type") == 1) ? MODE_ADD_INCOME: MODE_ADD_EXPENSE;
+        type = intent.getIntExtra("type", 1) == 1 ? MODE_ADD_INCOME: MODE_ADD_EXPENSE;
 
         tsCategory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +79,13 @@ public class AddTransactionActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 setDate(v);
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 
@@ -119,8 +131,7 @@ public class AddTransactionActivity extends AppCompatActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE ){
-            Intent intent = getIntent();
-            categoryid = (Integer)intent.getSerializableExtra("categoryid");
+            categoryid = data.getIntExtra("categoryid", 1);
 
             DBHelper db = new DBHelper(this);
             category = db.getCategory(categoryid);
