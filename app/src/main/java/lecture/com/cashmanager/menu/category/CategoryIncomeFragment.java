@@ -96,7 +96,7 @@ public class CategoryIncomeFragment extends Fragment {
                 Category category = (Category) parent.getItemAtPosition(position);
                 Intent showCategory = new Intent(getActivity(), ShowCategoryActivity.class);
                 showCategory.putExtra("categoryid", category.getId());
-                startActivity(showCategory);
+                startActivityForResult(showCategory, ADD_INCOME);
             }
         });
 

@@ -86,9 +86,10 @@ public class CategoryExpenseFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Category category = (Category) parent.getItemAtPosition(position);
                 Intent showCategory = new Intent(getActivity(), ShowCategoryActivity.class);
-                showCategory.putExtra("type", EXPENSE);
-                startActivity(showCategory);
+                showCategory.putExtra("categoryid", category.getId());
+                startActivityForResult(showCategory, ADD_EXPENSE);
             }
         });
 

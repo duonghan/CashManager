@@ -200,6 +200,7 @@
     <string name="no">Không</string>
     <string name="type">Kiểu</string>
     <string name="show_category">Chi tiết khoản mục</string>
+    <string name="txt_delete_success">Xóa thành công</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>
