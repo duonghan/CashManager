@@ -98,12 +98,18 @@ public class AddCategoryActivity extends AppCompatActivity {
     @Override
     public void finish() {
 
-        Intent data = new Intent();
-        // Send request to refresh or not list view in Category Activity
-        data.putExtra("needRefresh", needRefresh);
+        if(mode==MODE_CREATE ){
+            Intent data = new Intent();
+            // Send request to refresh or not list view in Category Activity
+            data.putExtra("needRefresh", needRefresh);
 
-        // Activity is completed and return data
-        this.setResult(Activity.RESULT_OK, data);
+            // Activity is completed and return data
+            this.setResult(Activity.RESULT_OK, data);
+        }else{
+            Intent intent = new Intent(this, CategoryActivity.class);
+            intent.putExtra("needRefresh", needRefresh);
+            startActivity(intent);
+        }
         super.finish();
     }
 }
