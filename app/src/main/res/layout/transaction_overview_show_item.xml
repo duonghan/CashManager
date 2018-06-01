@@ -16,7 +16,7 @@
             android:id="@+id/txt_title_overview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Overview"
+            android:text="@string/txt_overview"
             android:textSize="25sp"
             android:textStyle="bold"
             />
@@ -27,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tap to view full report"
+            android:visibility="invisible"
             android:textSize="15sp"
             android:textStyle="italic"
             />
@@ -37,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_right_black_24dp"/>
-        
+
         <View
             android:id="@+id/first_line"
             android:layout_marginTop="10dp"
@@ -51,7 +52,7 @@
             android:layout_below="@id/first_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Inflow"
+            android:text="@string/txt_inflow"
             android:textSize="17sp"/>
 
         <TextView
@@ -81,7 +82,7 @@
             android:layout_marginEnd="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Outflow"
+            android:text="@string/txt_outflow"
             android:textColor="@color/red"
             android:textSize="17sp"/>
 

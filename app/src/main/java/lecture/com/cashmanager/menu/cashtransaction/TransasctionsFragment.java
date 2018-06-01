@@ -10,9 +10,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -28,8 +30,12 @@ import lecture.com.cashmanager.adapters.TransactionShowAdapter;
 import lecture.com.cashmanager.R;
 import lecture.com.cashmanager.db.DBHelper;
 import lecture.com.cashmanager.entity.CashInfo;
+import lecture.com.cashmanager.entity.CashInfoMonth;
+import lecture.com.cashmanager.entity.OverviewInfo;
 import lecture.com.cashmanager.model.CashTransaction;
 import lecture.com.cashmanager.model.Category;
+
+import static android.support.constraint.Constraints.TAG;
 
 
 /**
@@ -47,9 +53,16 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
     private static final int MY_REQUEST_CODE = 1101;
 
     RecyclerView recyclerView;
+    CashInfoMonth cashInfoMonth;
     List<CashInfo> transactionList;
     TransactionShowAdapter adapter;
 
+    private View rootView;
+    private View noctView;
+    private View ctOverView;
+    private TextView inflow;
+    private TextView outflow;
+    private TextView summary;
 
     public TransasctionsFragment() {
         // Required empty public constructor
@@ -59,7 +72,15 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_transactions, container, false);
+
+        rootView = inflater.inflate(R.layout.fragment_transactions, container, false);
+        noctView = rootView.findViewById(R.id.no_transaction);
+        ctOverView = rootView.findViewById(R.id.transaction_overview);
+
+
+        inflow = ctOverView.findViewById(R.id.txt_inflow_value);
+        outflow = ctOverView.findViewById(R.id.txt_outflow_value);
+        summary = ctOverView.findViewById(R.id.txt_summary_value);
 
         fab_income = rootView.findViewById(R.id.fab_income);
         fab_expense = rootView.findViewById(R.id.fab_expense);
@@ -91,22 +112,14 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
-//                Toast.makeText(getContext(), DateFormat.format("MM/yyyy", date) + " is selected!", Toast.LENGTH_SHORT).show();
                 currentMonth = date.get(Calendar.MONTH) + 1;
-                Toast.makeText(getContext(), currentMonth + "", Toast.LENGTH_LONG).show();
+                setViewByMonth(currentMonth);
             }
 
         });
 
-        recyclerView = rootView.findViewById(R.id.listTransactions);
-        transactionList = initData(50);
-
-        adapter = new TransactionShowAdapter(getActivity(), transactionList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(adapter);
-        animationAdapter.setDuration(500);
-        recyclerView.setAdapter(animationAdapter);
+        currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        setViewByMonth(currentMonth);
 
         return rootView;
     }
@@ -133,28 +146,47 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    private List<CashInfo> initData(int n){
-        List<CashInfo> list = new ArrayList<>();
-        for (int i = 0; i< n; i++){
-            list.add(new CashInfo(25000, "category", "description", "15/05/2018"));
-        }
-
-        return list;
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && requestCode == MY_REQUEST_CODE ) {
             boolean needRefresh = data.getBooleanExtra("needRefresh",true);
             // Refresh ListView
             if(needRefresh) {
-                this.transactionList.clear();
-                DBHelper db = new DBHelper(getContext());
-                List<CashInfo> list=  db.getCTMonthInfo(currentMonth);
-                this.transactionList.addAll(list);
-                // Thông báo dữ liệu thay đổi (Để refresh ListView).
-                this.adapter.notifyDataSetChanged();
+//                this.transactionList.clear();
+//                DBHelper db = new DBHelper(getContext());
+//                List<CashInfo> list=  db.getCTMonthInfo(currentMonth);
+//                this.transactionList.addAll(list);
+//                // Thông báo dữ liệu thay đổi (Để refresh ListView).
+//                this.adapter.notifyDataSetChanged();
             }
+        }
+    }
+
+    public void setViewByMonth(int month){
+
+        recyclerView = rootView.findViewById(R.id.listTransactions);
+        DBHelper db = new DBHelper(getActivity());
+        cashInfoMonth = db.getCTMonthInfo(currentMonth);
+//        transactionList = db.getCTMonthInfo(currentMonth);
+        if(cashInfoMonth.getDay().size() > 0){
+            ctOverView.setVisibility(rootView.VISIBLE);
+            recyclerView.setVisibility(rootView.VISIBLE);
+            noctView.setVisibility(rootView.GONE);
+
+            adapter = new TransactionShowAdapter(getActivity(), cashInfoMonth);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            OverviewInfo overviewInfo = db.getOverviewInfoByMonth(currentMonth);
+            inflow.setText(String.valueOf(overviewInfo.getInflow()));
+            outflow.setText(String.valueOf(overviewInfo.getOutflow()));
+            summary.setText(String.valueOf(overviewInfo.getSummary()));
+
+            ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(adapter);
+            animationAdapter.setDuration(500);
+            recyclerView.setAdapter(animationAdapter);
+        }else{
+            ctOverView.setVisibility(rootView.GONE);
+            recyclerView.setVisibility(rootView.GONE);
+            noctView.setVisibility(rootView.VISIBLE);
         }
     }
 }

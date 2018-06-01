@@ -27,6 +27,7 @@
 
     <!--When no any transaction-->
     <include
+        android:id="@+id/no_transaction"
         layout="@layout/fm_no_transaction"
         android:visibility="invisible"/>
 

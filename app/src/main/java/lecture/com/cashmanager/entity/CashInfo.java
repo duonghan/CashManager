@@ -5,12 +5,14 @@ public class CashInfo {
     private String category;
     private String description;
     private String date;
+    private int type;
 
-    public CashInfo(int value, String category, String description, String date) {
+    public CashInfo(int value, String category, String description, String date, int type) {
         this.value = value;
         this.category = category;
         this.description = description;
         this.date = date;
+        this.type = type;
     }
 
     public CashInfo() {
@@ -47,4 +49,13 @@ public class CashInfo {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
 }

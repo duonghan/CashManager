@@ -23,14 +23,16 @@ import java.util.List;
 import lecture.com.cashmanager.R;
 import lecture.com.cashmanager.db.DBHelper;
 import lecture.com.cashmanager.menu.AddCategoryActivity;
+import lecture.com.cashmanager.model.CashTransaction;
 import lecture.com.cashmanager.model.Category;
 
 public class AddTransactionActivity extends AppCompatActivity{
 
-    Category category;
     private static final int MODE_ADD_INCOME = 1;
     private static final int MODE_ADD_EXPENSE = -1;
     private static final int MY_REQUEST_CODE = 1234;
+
+    Category category;
     private int type = 1;
     private int categoryid;
 
@@ -45,6 +47,7 @@ public class AddTransactionActivity extends AppCompatActivity{
 
     private Calendar calendar;
     private int year, month, day;
+    private String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,15 @@ public class AddTransactionActivity extends AppCompatActivity{
         Intent intent = this.getIntent();
         type = intent.getIntExtra("type", 1) == 1 ? MODE_ADD_INCOME: MODE_ADD_EXPENSE;
 
+        if(type == MODE_ADD_INCOME){
+            tsAmount.setTextColor(getResources().getColor(R.color.green));
+            tsAmount.setHintTextColor(getResources().getColor(R.color.green));
+        }
+        else{
+            tsAmount.setTextColor(getResources().getColor(R.color.red));
+            tsAmount.setHintTextColor(getResources().getColor(R.color.red));
+        }
+
         tsCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +100,24 @@ public class AddTransactionActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(category != null && !tsAmount.getText().toString().equals("")){
+                    DBHelper db = new DBHelper(getApplicationContext());
+                    SharedPreferences preferences = getSharedPreferences("user", Activity.MODE_PRIVATE);
+                    int userid = preferences.getInt("id", 1);
+                    db.addCT(new CashTransaction(userid, category.getId(), Integer.parseInt(tsAmount.getText().toString()), tsNote.getText().toString(), date, date));
+                    Intent data = getIntent();
+                    setResult(RESULT_OK, data);
+                    finish();
+                    Toast.makeText(getApplicationContext(), R.string.txt_add_ct_success, Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), R.string.txt_error_add_ct_failed, Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -120,8 +150,13 @@ public class AddTransactionActivity extends AppCompatActivity{
             };
 
     private void showDate(int year, int month, int day) {
-        tsDate.setText(new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year));
+        String strDay = day < 10 ? "0" + day: day+"";
+        String strMonth = month < 10 ? "0" + month: month+"";
+        date = year + "-" + strMonth + "-" + strDay;
+
+        tsDate.setText(new StringBuilder().append(strDay).append("/")
+                .append(strMonth).append("/").append(year));
+
     }
 
     private void showCategorySelector(int type){

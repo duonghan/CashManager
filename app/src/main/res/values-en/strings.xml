@@ -108,4 +108,10 @@
     <string name="type">Type</string>
     <string name="show_category">Category Details</string>
     <string name="txt_delete_success">Delete Successfully</string>
+    <string name="txt_add_ct_success">Add transaction successfully</string>
+    <string name="txt_error_add_ct_failed">Add transaction failed, please try again</string>
+    <string name="txt_overview">Overview</string>
+    <string name="txt_inflow">Inflow</string>
+    <string name="txt_outflow">Outflow</string>
+    <string name="txt_more_details">Tap to view full report</string>
 </resources>

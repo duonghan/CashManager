@@ -13,20 +13,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lecture.com.cashmanager.R;
+import lecture.com.cashmanager.db.DBHelper;
 import lecture.com.cashmanager.entity.CashInfo;
+import lecture.com.cashmanager.entity.CashInfoMonth;
 import lecture.com.cashmanager.model.CashTransaction;
 
 public class TransactionShowAdapter extends RecyclerView.Adapter<TransactionShowAdapter.ViewHolder> {
 
     private Context context;
-    private List<CashInfo> transactionInfoList;
+    private CashInfoMonth cashInfoMonth;
 
     public TransactionShowAdapter() {
     }
 
-    public TransactionShowAdapter(Context context, List<CashInfo> transactionInfoList) {
+    public TransactionShowAdapter(Context context, CashInfoMonth cashInfoMonth) {
         this.context = context;
-        this.transactionInfoList = transactionInfoList;
+        this.cashInfoMonth = cashInfoMonth;
     }
 
     @NonNull
@@ -38,20 +40,31 @@ public class TransactionShowAdapter extends RecyclerView.Adapter<TransactionShow
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CashInfo transaction = transactionInfoList.get(position);
-        ArrayList<CashTransaction> arrCashTransaction = new ArrayList<>();
+//        CashInfo transaction = transactionInfoList.get(position);
+        DBHelper db = new DBHelper(context);
+        int dayValue=0;
 
-        holder.txtDate.setText(transaction.getDate().toString());
-        holder.txtDateValue.setText(String.valueOf(transaction.getValue()));
+        String day = cashInfoMonth.getDay().get(position);
+        List<CashInfo> arrCashTransaction = db.getCTDayInfo(day);
 
-        //TODO: Add month transaction
-        //TransactionDateAdapter dateAdapter = new TransactionDateAdapter(this, R.layout.transaction_row_item, arrCashTransaction);
+        for(CashInfo cashInfo: arrCashTransaction){
+            if(cashInfo.getType() == 1)
+                dayValue += cashInfo.getValue();
+            else
+                dayValue -= cashInfo.getValue();
+        }
+
+        holder.txtDate.setText(day);
+        holder.txtDateValue.setText(String.valueOf(dayValue));
+
+        TransactionDateAdapter dateAdapter = new TransactionDateAdapter(context, R.layout.transaction_row_item, arrCashTransaction);
+        holder.lvCashItem.setAdapter(dateAdapter);
 
     }
 
     @Override
     public int getItemCount() {
-        return transactionInfoList.size();
+        return cashInfoMonth.getDay().size();
     }
 
 

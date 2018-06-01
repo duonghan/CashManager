@@ -201,6 +201,12 @@
     <string name="type">Kiểu</string>
     <string name="show_category">Chi tiết khoản mục</string>
     <string name="txt_delete_success">Xóa thành công</string>
+    <string name="txt_add_ct_success">Thêm giao dịch thành công</string>
+    <string name="txt_error_add_ct_failed">Thêm giao dịch thất bại, vui lòng kiểm tra lại</string>
+    <string name="txt_overview">Tổng quan</string>
+    <string name="txt_inflow">Tiền vào</string>
+    <string name="txt_outflow">Tiền ra</string>
+    <string name="txt_more_details">Chạm để xem báo cáo đầy đủ</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

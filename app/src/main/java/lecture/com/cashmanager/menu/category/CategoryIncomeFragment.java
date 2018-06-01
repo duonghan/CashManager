@@ -2,22 +2,17 @@ package lecture.com.cashmanager.menu.category;
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.preference.PreferenceManager;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -35,16 +30,8 @@ import lecture.com.cashmanager.model.Category;
  */
 public class CategoryIncomeFragment extends Fragment {
 
-    private static final int EXPENSE = -1;
     public final int ADD_INCOME = 111;
-    public final int ADD_EXPENSE = 222;
     public final int INCOME = 1;
-    private static final int MENU_ITEM_VIEW = 110;
-    private static final int MENU_ITEM_EDIT = 220;
-    private static final int MENU_ITEM_CREATE = 330;
-    private static final int MENU_ITEM_DELETE = 440;
-
-    private static final int MY_REQUEST_CODE = 1000;
 
     DBHelper categoryDAO;
     List<Category> listIncome = new ArrayList<>();
@@ -102,115 +89,6 @@ public class CategoryIncomeFragment extends Fragment {
 
         return view;
     }
-
-//    @Override
-//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-//        super.onCreateContextMenu(menu, v, menuInfo);
-//
-//        if(v.getId() == R.id.lv_category_income){
-//            menu.setHeaderTitle(getString(R.string.title_context_menu));
-//            // groupId, itemId, order, title
-//            menu.add(0, MENU_ITEM_VIEW , 0, getString(R.string.txt_menu_view));
-//            menu.add(0, MENU_ITEM_EDIT , 1, getString(R.string.txt_menu_edit));
-//            menu.add(0, MENU_ITEM_DELETE, 2, getString(R.string.txt_menu_delete));
-//        }
-//
-//        if(v.getId() == R.id.lv_category_expense){
-//            menu.setHeaderTitle(getString(R.string.title_context_menu));
-//            // groupId, itemId, order, title
-//            menu.add(1, MENU_ITEM_VIEW , 0, getString(R.string.txt_menu_view));
-//            menu.add(1, MENU_ITEM_EDIT , 1, getString(R.string.txt_menu_edit));
-//            menu.add(1, MENU_ITEM_DELETE, 2, getString(R.string.txt_menu_delete));
-//        }
-//    }
-//
-//    @Override
-//    public boolean onContextItemSelected(MenuItem item) {
-//        AdapterView.AdapterContextMenuInfo
-//                info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-//
-//        final Category selectedCategory = (Category) listView.getItemAtPosition(info.position);
-//
-//        if(item.getGroupId() == 0){
-//            if(item.getItemId() == MENU_ITEM_VIEW){
-//                new AlertDialog.Builder(getContext())
-//                        .setTitle(R.string.txt_menu_view)
-//                        .setIcon(R.drawable.ic_view)
-//                        .setMessage(selectedCategory.getName())
-//                        .show();
-//            }
-//            else if(item.getItemId() == MENU_ITEM_EDIT ){
-//                Intent intent = new Intent(getContext(), AddCategoryActivity.class);
-//                intent.putExtra("category", selectedCategory);
-//                intent.putExtra("type", INCOME);
-//                startActivityForResult(intent,ADD_INCOME);
-//            }
-//            else if(item.getItemId() == MENU_ITEM_DELETE){
-//                // Ask before delete category
-//                new AlertDialog.Builder(getContext())
-//                        .setTitle(R.string.txt_menu_delete)
-//                        .setIcon(R.drawable.ic_delete)
-//                        .setMessage(getString(R.string.txt_ask_delete)+ "\n" + selectedCategory.getName())
-//                        .setCancelable(false)
-//                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                deleteCategory(selectedCategory);
-//                            }
-//                        })
-//                        .setNegativeButton(R.string.no, null)
-//                        .show();
-//            }
-//            else {
-//                return false;
-//            }
-//        }
-//
-//        if(item.getGroupId() == 1){
-//            if(item.getItemId() == MENU_ITEM_VIEW){
-//                new AlertDialog.Builder(getContext())
-//                        .setTitle(R.string.txt_menu_view)
-//                        .setIcon(R.drawable.ic_view)
-//                        .setMessage(selectedCategory.getName())
-//                        .show();
-//            }
-//            else if(item.getItemId() == MENU_ITEM_EDIT ){
-//                Intent intent = new Intent(getContext(), AddCategoryActivity.class);
-//                intent.putExtra("category", selectedCategory);
-//                intent.putExtra("type", EXPENSE);
-//                startActivityForResult(intent,ADD_EXPENSE);
-//            }
-//            else if(item.getItemId() == MENU_ITEM_DELETE){
-//                // Ask before delete category
-//                new AlertDialog.Builder(getContext())
-//                        .setTitle(R.string.txt_menu_delete)
-//                        .setIcon(R.drawable.ic_delete)
-//                        .setMessage(getString(R.string.txt_ask_delete)+"\n" + selectedCategory.getName())
-//                        .setCancelable(false)
-//                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                deleteCategory(selectedCategory);
-//                            }
-//                        })
-//                        .setNegativeButton(R.string.no, null)
-//                        .show();
-//            }
-//            else {
-//                return false;
-//            }
-//        }
-//
-//
-//        return true;
-//    }
-//
-//    private void deleteCategory(Category selectedCategory) {
-//        DBHelper db = new DBHelper(getContext());
-//        db.deleteCategory(selectedCategory.getId(), true);
-//        listIncome.remove(selectedCategory);
-//
-//        // Refresh ListView.
-//        arrayAdapter.notifyDataSetChanged();
-//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

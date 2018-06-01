@@ -13,6 +13,8 @@ import java.util.List;
 import lecture.com.cashmanager.R;
 import lecture.com.cashmanager.SHA1Hash;
 import lecture.com.cashmanager.entity.CashInfo;
+import lecture.com.cashmanager.entity.CashInfoMonth;
+import lecture.com.cashmanager.entity.OverviewInfo;
 import lecture.com.cashmanager.model.Account;
 import lecture.com.cashmanager.model.CashTransaction;
 import lecture.com.cashmanager.model.Category;
@@ -456,13 +458,36 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param month
      * @return list of transaction in month
      */
-    public List<CashInfo> getCTMonthInfo(int month){
+    public CashInfoMonth getCTMonthInfo(int month){
+        List<String> lstDay = new ArrayList<>();
+
+        String strMonth = month < 10 ? "0" + month: month+"";
+
+        String query =  "SELECT " + CREATED +
+                " FROM " + TABLE_TRANSACTION + " WHERE strftime(\'%m\'," + CREATED + " ) = \"" + strMonth + "\" GROUP BY " + CREATED;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                lstDay.add(cursor.getString(0));
+            }while (cursor.moveToNext());
+
+            return new CashInfoMonth(lstDay);
+        }
+
+        db.close();
+        return null;
+    }
+
+    public List<CashInfo> getCTDayInfo (String day){
         List<CashInfo> cashTransactionList = new ArrayList<>();
 
         String query =  "SELECT ct." + VALUE + ",ct." +
-                DESCRIPTION + ", cc." + TABLE_CATEGORY + ", ct." + CREATED +
-                " FROM " + TABLE_TRANSACTION + " , " + TABLE_CATEGORY +
-                " WHERE " + CREATED + " LIKE " + "%/" + month + "/% AND ct." +
+                DESCRIPTION + ", cc." + NAME + ", ct." + CREATED + ", cc." + TYPE +
+                " FROM " + TABLE_TRANSACTION + " AS ct, " + TABLE_CATEGORY +
+                " AS cc WHERE ct." + CREATED + " = \"" + day+ "\" AND ct." +
                 CATEGORYID + " = cc." + ID;
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -472,9 +497,10 @@ public class DBHelper extends SQLiteOpenHelper {
             do{
                 CashInfo cashInfo = new CashInfo();
                 cashInfo.setValue(cursor.getInt(0));
-                cashInfo.setCategory(cursor.getString(1));
-                cashInfo.setDescription(cursor.getString(2));
+                cashInfo.setDescription(cursor.getString(1));
+                cashInfo.setCategory(cursor.getString(2));
                 cashInfo.setDate(cursor.getString(3));
+                cashInfo.setType(cursor.getInt(4));
 
                 cashTransactionList.add(cashInfo);
             }while (cursor.moveToNext());
@@ -482,6 +508,41 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.close();
         return cashTransactionList;
+    }
+
+    public OverviewInfo getOverviewInfoByMonth(int month){
+        OverviewInfo overviewInfo = new OverviewInfo();
+        int inflow = 0;
+        int outflow = 0;
+
+        String strMonth = month < 10 ? "0" + month: month+"";
+
+        String query =  "SELECT ct." + VALUE + ", cc." + TYPE +
+                " FROM " + TABLE_TRANSACTION + " AS ct, " + TABLE_CATEGORY +
+                " AS cc WHERE strftime(\'%m\'," + CREATED + " ) = \"" + strMonth+ "\" AND ct." +
+                CATEGORYID + " = cc." + ID;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                int amount = cursor.getInt(0);
+                int type = cursor.getInt(1);
+
+                if(type == 1)
+                    inflow += amount;
+                else
+                    outflow += amount;
+            }while (cursor.moveToNext());
+        }
+
+        db.close();
+
+        overviewInfo.setInflow(inflow);
+        overviewInfo.setOutflow(outflow);
+        overviewInfo.setSummary(inflow - outflow);
+        return overviewInfo;
     }
 
     public int updateCT(CashTransaction cashTransaction){
