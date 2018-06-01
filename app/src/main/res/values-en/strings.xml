@@ -118,4 +118,7 @@
     <string name="txt_time">Date</string>
     <string name="txt_show_ct">Show Transaction</string>
     <string name="txt_update_ct_success">Update cash transaction successfully</string>
+    <string name="txt_spn_time">By Time</string>
+    <string name="txt_spn_category">By Category</string>
+    <string name="txt_balance">Balance</string>
 </resources>

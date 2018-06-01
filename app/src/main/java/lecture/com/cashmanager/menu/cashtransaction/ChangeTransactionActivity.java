@@ -66,7 +66,7 @@ public class ChangeTransactionActivity extends AppCompatActivity{
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH) + 1;
+        month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
         showDate(year, month, day);
@@ -181,6 +181,7 @@ public class ChangeTransactionActivity extends AppCompatActivity{
             };
 
     private void showDate(int year, int month, int day) {
+        month = month + 1;
         String strDay = day < 10 ? "0" + day: day+"";
         String strMonth = month < 10 ? "0" + month: month+"";
         date = year + "-" + strMonth + "-" + strDay;

@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity
     private void displayHomePage() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.app_name);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         txtName = (TextView)headerView.findViewById(R.id.nav_header_name);
         txtAmount = (TextView)headerView.findViewById(R.id.nav_header_amount);
+
         SharedPreferences preferences = getSharedPreferences("user", Activity.MODE_PRIVATE);
         userid = preferences.getInt("id", 1);
         username = preferences.getString("username", "");

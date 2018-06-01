@@ -14,6 +14,8 @@ import lecture.com.cashmanager.R;
 import lecture.com.cashmanager.SHA1Hash;
 import lecture.com.cashmanager.entity.CashInfo;
 import lecture.com.cashmanager.entity.CashInfoMonth;
+import lecture.com.cashmanager.entity.CashReportBar;
+import lecture.com.cashmanager.entity.CategoryReportPie;
 import lecture.com.cashmanager.entity.OverviewInfo;
 import lecture.com.cashmanager.model.Account;
 import lecture.com.cashmanager.model.CashTransaction;
@@ -158,13 +160,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
-            int value = cursor.getInt(0);
-            int type = cursor.getInt(1);
-            if(type == 1){
-                amount += value;
-            }else{
-                amount -= value;
-            }
+            do{
+                int value = cursor.getInt(0);
+                int type = cursor.getInt(1);
+                if(type == 1){
+                    amount += value;
+                }else{
+                    amount -= value;
+                }
+            }while (cursor.moveToNext());
         }
 
         db.close();
@@ -451,12 +455,60 @@ public class DBHelper extends SQLiteOpenHelper {
         return null;
     }
 
+
+    public CashReportBar getCashReportBar(int month, int year, int type){
+        int amount = 0;
+        String strMonth = month < 10 ? year + "-0" + month : year + "-" + month;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT sum("+ VALUE +
+                ") FROM " + TABLE_TRANSACTION + " AS ct," + TABLE_CATEGORY + " AS cc" +
+                " WHERE strftime(\'%Y-%m\'," + CREATED + " ) = \"" + strMonth +
+                "\" AND ct." + CATEGORYID + " = cc." + ID + " AND cc." + TYPE + " = " + type;
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){
+            amount += cursor.getInt(0);
+        }
+        db.close();
+        return new CashReportBar(month, amount);
+    }
+
+    public List<CategoryReportPie> getCategoryReportPie(int type){
+
+        List<CategoryReportPie> categoryReportPies = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT sum(ct."+ VALUE +") AS total_value, ct." + CATEGORYID + ", cc." + NAME +
+                " FROM " + TABLE_TRANSACTION + " AS ct, " + TABLE_CATEGORY + " AS cc " +
+                " WHERE ct." + CATEGORYID + " = cc." + ID + " AND cc." + TYPE + " = " + type +
+                " GROUP BY ct." + CATEGORYID;
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                CategoryReportPie categoryReportPie = new CategoryReportPie();
+                categoryReportPie.setAmount(cursor.getInt(0));
+                categoryReportPie.setCategoryid(cursor.getInt(1));
+                categoryReportPie.setCategoryName(cursor.getString(2));
+
+                categoryReportPies.add(categoryReportPie);
+            }while (cursor.moveToNext());
+        }
+        db.close();
+        return categoryReportPies;
+
+    }
+
     public List<CashTransaction> getAllTransactionByCategory(int categoryID){
         List<CashTransaction> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
         String query = "SELECT * FROM " + TABLE_TRANSACTION +
                 " WHERE " + CATEGORYID + " = " + categoryID;
+
         Cursor cursor = db.rawQuery(query, null);
 
         // Looping through all rows and adding to list

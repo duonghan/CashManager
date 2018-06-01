@@ -14,35 +14,35 @@
             android:title="@string/pref_title_change_lang" />
 
 
-        <EditTextPreference
-            android:title="@string/pref_change_format_date"
-            android:key="date_format" />
+        <!--<EditTextPreference-->
+            <!--android:title="@string/pref_change_format_date"-->
+            <!--android:key="date_format" />-->
 
-        <EditTextPreference
-            android:title="@string/pref_change_format_currency"
-            android:key="currency_format" />
+        <!--<EditTextPreference-->
+            <!--android:title="@string/pref_change_format_currency"-->
+            <!--android:key="currency_format" />-->
 
-        <EditTextPreference
-            android:title="@string/pref_change_first_day"
-            android:key="first_day" />
+        <!--<EditTextPreference-->
+            <!--android:title="@string/pref_change_first_day"-->
+            <!--android:key="first_day" />-->
 
-        <EditTextPreference
-            android:title="@string/pref_update_index"
-            android:key="update_index" />
+        <!--<EditTextPreference-->
+            <!--android:title="@string/pref_update_index"-->
+            <!--android:key="update_index" />-->
 
     </PreferenceCategory>
 
 
 
-    <EditTextPreference
-        android:capitalize="words"
-        android:defaultValue="@string/pref_default_display_name"
-        android:inputType="textCapWords"
-        android:key="example_text"
-        android:maxLines="1"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="@string/pref_title_display_name" />
+    <!--<EditTextPreference-->
+        <!--android:capitalize="words"-->
+        <!--android:defaultValue="@string/pref_default_display_name"-->
+        <!--android:inputType="textCapWords"-->
+        <!--android:key="example_text"-->
+        <!--android:maxLines="1"-->
+        <!--android:selectAllOnFocus="true"-->
+        <!--android:singleLine="true"-->
+        <!--android:title="@string/pref_title_display_name" />-->
 
 
 </PreferenceScreen>

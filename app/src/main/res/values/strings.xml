@@ -211,6 +211,9 @@
     <string name="txt_time">Thời điểm</string>
     <string name="txt_show_ct">Xem giao dịch</string>
     <string name="txt_update_ct_success">Cập nhật giao dịch thành công</string>
+    <string name="txt_spn_time">Theo thời gian</string>
+    <string name="txt_spn_category">Theo nhóm</string>
+    <string name="txt_balance">Số dư</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

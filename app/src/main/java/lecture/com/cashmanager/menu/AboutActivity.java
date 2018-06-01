@@ -7,23 +7,29 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import lecture.com.cashmanager.R;
 
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener{
 
+    ImageView icLogo;
     ImageView icShare;
     ImageView icFB;
     ImageView icTwitter;
     ImageView icBBM;
     ImageView icGgPlus;
 
+    private Animation animation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
+        icLogo = findViewById(R.id.about_logo);
         icShare = findViewById(R.id.ic_about_share);
         icFB = findViewById(R.id.ic_about_facebook);
         icTwitter = findViewById(R.id.ic_about_twitter);
@@ -35,6 +41,14 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         icTwitter.setOnClickListener(this);
         icBBM.setOnClickListener(this);
         icGgPlus.setOnClickListener(this);
+
+        animation = AnimationUtils.loadAnimation(this, R.anim.open_enter);
+        icLogo.setAnimation(animation);
+        icShare.setAnimation(AnimationUtils.loadAnimation(this, R.anim.bottom_in));
+        icFB.setAnimation(AnimationUtils.loadAnimation(this, R.anim.bottom_in));
+        icTwitter.setAnimation(AnimationUtils.loadAnimation(this, R.anim.bottom_in));
+        icBBM.setAnimation(AnimationUtils.loadAnimation(this, R.anim.bottom_in));
+        icGgPlus.setAnimation(AnimationUtils.loadAnimation(this, R.anim.bottom_in));
     }
 
     @Override
