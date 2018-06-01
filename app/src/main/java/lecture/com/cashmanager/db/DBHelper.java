@@ -272,7 +272,7 @@ public class DBHelper extends SQLiteOpenHelper {
             String [] incomeEntriesVi = {"Thưởng","Được tặng","Tiền lãi","Lương","Bán đồ","Đi vay", "Thu nợ", "Khác"};
 
             String [] expenseEntriesVi = {"Hóa đơn và Tiện ích","Giải trí","Ăn uống",
-                    "Kinh doanh","Quà tăng và Từ thiện","Sức khỏe","Nghỉ lễ","Gia đình",
+                    "Kinh doanh","Quà tặng và Từ thiện","Sức khỏe","Nghỉ lễ","Gia đình",
                     "Vật nuôi","Mua sắm","Giáo dục","Người yêu và Bạn bè","Bảo hiểm","Đầu tư",
                     "Di chuyển","Du lịch","Rút tiền","Chi phí","Trả nợ", "Cho vay"};
 
