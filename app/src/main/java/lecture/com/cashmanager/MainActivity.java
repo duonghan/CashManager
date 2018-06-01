@@ -37,11 +37,12 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     private TextView txtName;
-    private TextView txtEmail;
+    private TextView txtAmount;
     private int userid;
     private String username;
     private String name;
     private String email;
+    private long amount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +79,15 @@ public class MainActivity extends AppCompatActivity
         // Inflate the layout for this fragment
         View headerView = navigationView.getHeaderView(0);
         txtName = (TextView)headerView.findViewById(R.id.nav_header_name);
-        txtEmail = (TextView)headerView.findViewById(R.id.nav_header_email);
+        txtAmount = (TextView)headerView.findViewById(R.id.nav_header_amount);
         SharedPreferences preferences = getSharedPreferences("user", Activity.MODE_PRIVATE);
         userid = preferences.getInt("id", 1);
         username = preferences.getString("username", "");
         name = preferences.getString("name", "John Cena");
         email = preferences.getString("email", "example@gmail.com");
+        amount = preferences.getLong("amount", 0);
         txtName.setText(name);
-        txtEmail.setText(email);
+        txtAmount.setText(String.valueOf(amount));
     }
 
 

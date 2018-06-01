@@ -25,7 +25,7 @@
     <string name="txt_Entertainment">Giải trí</string>
     <string name="txt_Food_and_Beverage">Ăn uống</string>
     <string name="txt_Business">Kinh doanh</string>
-    <string name="txt_Gifts_and_Donations">Quà tăng và Từ thiện</string>
+    <string name="txt_Gifts_and_Donations">Quà tặng và Từ thiện</string>
     <string name="txt_Health_and_Fitness">Sức khỏe</string>
     <string name="txt_Holidays">Nghỉ lễ</string>
     <string name="txt_Family">Gia đình</string>
@@ -207,6 +207,10 @@
     <string name="txt_inflow">Tiền vào</string>
     <string name="txt_outflow">Tiền ra</string>
     <string name="txt_more_details">Chạm để xem báo cáo đầy đủ</string>
+    <string name="txt_amount">Số tiền</string>
+    <string name="txt_time">Thời điểm</string>
+    <string name="txt_show_ct">Xem giao dịch</string>
+    <string name="txt_update_ct_success">Cập nhật giao dịch thành công</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

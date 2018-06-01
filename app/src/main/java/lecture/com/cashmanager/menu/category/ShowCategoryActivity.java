@@ -1,6 +1,5 @@
 package lecture.com.cashmanager.menu.category;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,12 +12,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import lecture.com.cashmanager.R;
-import lecture.com.cashmanager.authentication.LoginActivity;
 import lecture.com.cashmanager.db.DBHelper;
-import lecture.com.cashmanager.menu.AddCategoryActivity;
 import lecture.com.cashmanager.model.Category;
 
 public class ShowCategoryActivity extends AppCompatActivity {
@@ -60,13 +55,11 @@ public class ShowCategoryActivity extends AppCompatActivity {
             txtType.setTextColor(getResources().getColor(R.color.red));
         }
 
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.show_category, menu);
+        getMenuInflater().inflate(R.menu.show, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -79,7 +72,7 @@ public class ShowCategoryActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_edit) {
-            Intent intent = new Intent(this, AddCategoryActivity.class);
+            Intent intent = new Intent(this, ChangeCategoryActivity.class);
                 intent.putExtra("category", category);
                 intent.putExtra("type", category.getType());
                 startActivity(intent);

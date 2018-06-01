@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
-            android:text="Outflow"
+            android:text="@string/txt_outflow"
             android:textSize="17sp"/>
 
         <TextView
@@ -71,7 +71,6 @@
             android:layout_marginEnd="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Inflow"
             android:textColor="@color/tb_tiffany_blue"
             android:textSize="17sp"/>
 
@@ -82,7 +81,6 @@
             android:layout_marginEnd="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_outflow"
             android:textColor="@color/red"
             android:textSize="17sp"/>
 

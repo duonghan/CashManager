@@ -148,6 +148,30 @@ public class DBHelper extends SQLiteOpenHelper {
         return account;
     }
 
+    public long getAmountOfAcccount(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        long amount = 0L;
+
+        String query = "SELECT ct." + VALUE + ", cc." + TYPE +
+                        " FROM " + TABLE_TRANSACTION + " AS ct, " + TABLE_CATEGORY + " AS cc " +
+                        "WHERE ct." + CATEGORYID + " = cc." + ID + " AND ct." + USERID + " = " + id;
+
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            int value = cursor.getInt(0);
+            int type = cursor.getInt(1);
+            if(type == 1){
+                amount += value;
+            }else{
+                amount -= value;
+            }
+        }
+
+        db.close();
+
+        return amount;
+    }
+
     public boolean checkAccount(String username, String password){
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -420,6 +444,8 @@ public class DBHelper extends SQLiteOpenHelper {
             cashTransaction.setDescription(cursor.getString(4));
             cashTransaction.setCreated(cursor.getString(5));
             cashTransaction.setModified(cursor.getString(6));
+
+            return cashTransaction;
         }
         db.close();
         return null;
@@ -484,7 +510,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public List<CashInfo> getCTDayInfo (String day){
         List<CashInfo> cashTransactionList = new ArrayList<>();
 
-        String query =  "SELECT ct." + VALUE + ",ct." +
+        String query =  "SELECT ct." + ID + ", ct."+ VALUE + ",ct." +
                 DESCRIPTION + ", cc." + NAME + ", ct." + CREATED + ", cc." + TYPE +
                 " FROM " + TABLE_TRANSACTION + " AS ct, " + TABLE_CATEGORY +
                 " AS cc WHERE ct." + CREATED + " = \"" + day+ "\" AND ct." +
@@ -496,11 +522,12 @@ public class DBHelper extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             do{
                 CashInfo cashInfo = new CashInfo();
-                cashInfo.setValue(cursor.getInt(0));
-                cashInfo.setDescription(cursor.getString(1));
-                cashInfo.setCategory(cursor.getString(2));
-                cashInfo.setDate(cursor.getString(3));
-                cashInfo.setType(cursor.getInt(4));
+                cashInfo.setId(cursor.getInt(0));
+                cashInfo.setValue(cursor.getInt(1));
+                cashInfo.setDescription(cursor.getString(2));
+                cashInfo.setCategory(cursor.getString(3));
+                cashInfo.setDate(cursor.getString(4));
+                cashInfo.setType(cursor.getInt(5));
 
                 cashTransactionList.add(cashInfo);
             }while (cursor.moveToNext());
@@ -508,6 +535,32 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.close();
         return cashTransactionList;
+    }
+
+    public CashInfo getCashInfo(int id){
+        String query =  "SELECT ct." + ID + ", ct."+ VALUE + ",ct." +
+                DESCRIPTION + ", cc." + NAME + ", ct." + CREATED + ", cc." + TYPE +
+                " FROM " + TABLE_TRANSACTION + " AS ct, " + TABLE_CATEGORY +
+                " AS cc WHERE ct." + ID + " = " + id+ " AND ct." +
+                CATEGORYID + " = cc." + ID;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){
+            CashInfo cashInfo = new CashInfo();
+            cashInfo.setId(cursor.getInt(0));
+            cashInfo.setValue(cursor.getInt(1));
+            cashInfo.setDescription(cursor.getString(2));
+            cashInfo.setCategory(cursor.getString(3));
+            cashInfo.setDate(cursor.getString(4));
+            cashInfo.setType(cursor.getInt(5));
+
+            return cashInfo;
+        }
+
+        db.close();
+        return null;
     }
 
     public OverviewInfo getOverviewInfoByMonth(int month){

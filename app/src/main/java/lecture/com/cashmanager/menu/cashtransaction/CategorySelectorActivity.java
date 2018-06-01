@@ -54,11 +54,10 @@ public class CategorySelectorActivity extends AppCompatActivity {
                 category = (Category)parent.getItemAtPosition(position);
                 Intent data = getIntent();
                 data.putExtra("categoryid", category.getId());
-//                data.putExtra("type", type);
+                data.putExtra("type", type);
                 setResult(RESULT_OK, data);
                 finish();
             }
         });
     }
-
 }

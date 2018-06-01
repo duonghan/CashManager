@@ -25,10 +25,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".menu.cashtransaction.AddTransactionActivity"
+            android:name=".menu.cashtransaction.ChangeTransactionActivity"
             android:label="@string/title_header_transaction_add"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings"
@@ -46,7 +46,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".menu.AddCategoryActivity"
+            android:name=".menu.category.ChangeCategoryActivity"
             android:label="@string/title_header_category_add"
             android:parentActivityName=".menu.CategoryActivity"
             android:theme="@style/AppTheme">
@@ -72,13 +72,18 @@
         <activity
             android:name=".menu.cashtransaction.CategorySelectorActivity"
             android:label="@string/select_category"
-            android:parentActivityName=".menu.cashtransaction.AddTransactionActivity"
+            android:parentActivityName=".menu.cashtransaction.ChangeTransactionActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".menu.category.ShowCategoryActivity"
-            android:theme="@style/AppTheme"
             android:label="@string/show_category"
-            android:parentActivityName=".menu.CategoryActivity"/>
+            android:parentActivityName=".menu.CategoryActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".menu.cashtransaction.ShowCTActivity"
+            android:label="@string/txt_show_ct"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

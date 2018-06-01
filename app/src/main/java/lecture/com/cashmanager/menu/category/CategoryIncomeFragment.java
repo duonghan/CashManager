@@ -22,7 +22,6 @@ import java.util.List;
 import lecture.com.cashmanager.R;
 import lecture.com.cashmanager.adapters.CategoryShowAdapter;
 import lecture.com.cashmanager.db.DBHelper;
-import lecture.com.cashmanager.menu.AddCategoryActivity;
 import lecture.com.cashmanager.model.Category;
 
 /**
@@ -71,7 +70,7 @@ public class CategoryIncomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addCategory = new Intent(getActivity(), AddCategoryActivity.class);
+                Intent addCategory = new Intent(getActivity(), ChangeCategoryActivity.class);
                 addCategory.putExtra("type", INCOME);
                 startActivityForResult(addCategory, ADD_INCOME);
             }

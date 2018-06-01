@@ -1,13 +1,16 @@
 package lecture.com.cashmanager.entity;
 
 public class CashInfo {
+
+    private int id;
     private int value;
     private String category;
     private String description;
     private String date;
     private int type;
 
-    public CashInfo(int value, String category, String description, String date, int type) {
+    public CashInfo(int id, int value, String category, String description, String date, int type) {
+        this.id = id;
         this.value = value;
         this.category = category;
         this.description = description;
@@ -58,4 +61,11 @@ public class CashInfo {
         this.type = type;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

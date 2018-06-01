@@ -1,27 +1,33 @@
 package lecture.com.cashmanager.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lecture.com.cashmanager.R;
 import lecture.com.cashmanager.db.DBHelper;
 import lecture.com.cashmanager.entity.CashInfo;
 import lecture.com.cashmanager.entity.CashInfoMonth;
-import lecture.com.cashmanager.model.CashTransaction;
+import lecture.com.cashmanager.menu.cashtransaction.ShowCTActivity;
+import lecture.com.cashmanager.menu.category.ShowCategoryActivity;
 
 public class TransactionShowAdapter extends RecyclerView.Adapter<TransactionShowAdapter.ViewHolder> {
 
     private Context context;
+    private ContextCompat contextCompat;
     private CashInfoMonth cashInfoMonth;
+    DBHelper db;
 
     public TransactionShowAdapter() {
     }
@@ -29,6 +35,7 @@ public class TransactionShowAdapter extends RecyclerView.Adapter<TransactionShow
     public TransactionShowAdapter(Context context, CashInfoMonth cashInfoMonth) {
         this.context = context;
         this.cashInfoMonth = cashInfoMonth;
+        this.db = new DBHelper(context);
     }
 
     @NonNull
@@ -41,11 +48,10 @@ public class TransactionShowAdapter extends RecyclerView.Adapter<TransactionShow
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 //        CashInfo transaction = transactionInfoList.get(position);
-        DBHelper db = new DBHelper(context);
         int dayValue=0;
 
         String day = cashInfoMonth.getDay().get(position);
-        List<CashInfo> arrCashTransaction = db.getCTDayInfo(day);
+        final List<CashInfo> arrCashTransaction = db.getCTDayInfo(day);
 
         for(CashInfo cashInfo: arrCashTransaction){
             if(cashInfo.getType() == 1)
@@ -60,6 +66,16 @@ public class TransactionShowAdapter extends RecyclerView.Adapter<TransactionShow
         TransactionDateAdapter dateAdapter = new TransactionDateAdapter(context, R.layout.transaction_row_item, arrCashTransaction);
         holder.lvCashItem.setAdapter(dateAdapter);
 
+        holder.lvCashItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                CashInfo cashInfo = (CashInfo) parent.getItemAtPosition(position);
+                CashInfo cashInfo = arrCashTransaction.get(position);
+                Intent showCT = new Intent(context, ShowCTActivity.class);
+                showCT.putExtra("ctID", cashInfo.getId());
+                context.startActivity(showCT);
+            }
+        });
     }
 
     @Override

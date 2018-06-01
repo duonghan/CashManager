@@ -3,23 +3,18 @@ package lecture.com.cashmanager.menu.cashtransaction;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -32,10 +27,6 @@ import lecture.com.cashmanager.db.DBHelper;
 import lecture.com.cashmanager.entity.CashInfo;
 import lecture.com.cashmanager.entity.CashInfoMonth;
 import lecture.com.cashmanager.entity.OverviewInfo;
-import lecture.com.cashmanager.model.CashTransaction;
-import lecture.com.cashmanager.model.Category;
-
-import static android.support.constraint.Constraints.TAG;
 
 
 /**
@@ -130,13 +121,13 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
         switch (v.getId()){
 
             case R.id.fab_income:
-                Intent addIncome = new Intent(getActivity(), AddTransactionActivity.class);
+                Intent addIncome = new Intent(getActivity(), ChangeTransactionActivity.class);
                 addIncome.putExtra("type",1);
                 startActivityForResult(addIncome, MY_REQUEST_CODE);
                 break;
 
             case R.id.fab_expense:
-                Intent addExpense = new Intent(getActivity(), AddTransactionActivity.class);
+                Intent addExpense = new Intent(getActivity(), ChangeTransactionActivity.class);
                 addExpense.putExtra("type",-1);
                 startActivityForResult(addExpense, MY_REQUEST_CODE);
                 break;
@@ -152,13 +143,9 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
             boolean needRefresh = data.getBooleanExtra("needRefresh",true);
             // Refresh ListView
             if(needRefresh) {
-//                this.transactionList.clear();
-//                DBHelper db = new DBHelper(getContext());
-//                List<CashInfo> list=  db.getCTMonthInfo(currentMonth);
-//                this.transactionList.addAll(list);
-//                // Thông báo dữ liệu thay đổi (Để refresh ListView).
-//                this.adapter.notifyDataSetChanged();
+                this.getActivity().recreate();
             }
+
         }
     }
 
@@ -168,12 +155,12 @@ public class TransasctionsFragment extends Fragment implements View.OnClickListe
         DBHelper db = new DBHelper(getActivity());
         cashInfoMonth = db.getCTMonthInfo(currentMonth);
 //        transactionList = db.getCTMonthInfo(currentMonth);
-        if(cashInfoMonth.getDay().size() > 0){
+        if(cashInfoMonth != null){
             ctOverView.setVisibility(rootView.VISIBLE);
             recyclerView.setVisibility(rootView.VISIBLE);
             noctView.setVisibility(rootView.GONE);
 
-            adapter = new TransactionShowAdapter(getActivity(), cashInfoMonth);
+            adapter = new TransactionShowAdapter(getContext(), cashInfoMonth);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             OverviewInfo overviewInfo = db.getOverviewInfoByMonth(currentMonth);
             inflow.setText(String.valueOf(overviewInfo.getInflow()));

@@ -2,21 +2,16 @@ package lecture.com.cashmanager.menu.category;
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.preference.PreferenceManager;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -26,7 +21,6 @@ import java.util.List;
 import lecture.com.cashmanager.R;
 import lecture.com.cashmanager.adapters.CategoryShowAdapter;
 import lecture.com.cashmanager.db.DBHelper;
-import lecture.com.cashmanager.menu.AddCategoryActivity;
 import lecture.com.cashmanager.model.Category;
 
 /**
@@ -73,7 +67,7 @@ public class CategoryExpenseFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addCategory = new Intent(getActivity(), AddCategoryActivity.class);
+                Intent addCategory = new Intent(getActivity(), ChangeCategoryActivity.class);
                 addCategory.putExtra("type", EXPENSE);
                 startActivityForResult(addCategory, ADD_EXPENSE);
             }

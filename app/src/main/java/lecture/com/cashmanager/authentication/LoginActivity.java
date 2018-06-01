@@ -143,6 +143,9 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("name", account.getName());
         editor.putString("email", account.getEmail());
         editor.putInt("id", account.getId());
+
+        DBHelper db = new DBHelper(this);
+        editor.putLong("amount", db.getAmountOfAcccount(account.getId()));
         editor.apply();
 
         startActivity(intent);
