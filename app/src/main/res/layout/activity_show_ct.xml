@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    tools:context=".menu.cashtransaction.ShowCTActivity">
+
+    <TableRow
+        android:weightSum="6">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:layout_gravity="right"
+            android:textColor="@android:color/black"
+            android:text="@string/txt_amount" />
+
+        <TextView
+            android:id="@+id/txt_show_ct_amount"
+            android:layout_weight="5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:paddingStart="20dp"
+            android:textSize="22sp"/>
+
+    </TableRow>
+    <TableRow
+        android:layout_marginVertical="10dp"
+        android:layout_gravity="left"
+        android:layout_width="match_parent">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            style="@style/Divider"/>
+    </TableRow>
+
+    <TableRow
+        android:weightSum="6"
+        >
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/category"
+            android:layout_gravity="right"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text"/>
+
+        <TextView
+            android:id="@+id/txt_show_ct_category"
+            android:layout_weight="5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_marginVertical="10dp"
+        android:layout_width="match_parent">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            style="@style/Divider"/>
+    </TableRow>
+
+    <TableRow
+        android:weightSum="6"
+        >
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/txt_time"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text"/>
+
+        <TextView
+            android:id="@+id/txt_show_ct_date"
+            android:layout_weight="5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text"/>
+
+    </TableRow>
+
+</TableLayout>
